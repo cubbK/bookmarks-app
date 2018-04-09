@@ -1,0 +1,23 @@
+{
+    "name": "bookmarks-app-v2",
+    "version": "1.0.0",
+    "description": "",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "start": "node app.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/cubbK/bookmarks-app-v2.git"
+    },
+    "author": "",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/cubbK/bookmarks-app-v2/issues"
+    },
+    "homepage": "https://github.com/cubbK/bookmarks-app-v2#readme",
+    "dependencies": {
+        "express": "^4.16.3"
+    }
+}
