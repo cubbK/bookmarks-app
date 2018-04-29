@@ -1,3 +1,4 @@
+require('dotenv-safe').config(); // loads .env file
 var express = require("express");
 var bodyParser = require("body-parser");
 var routes = require("./routes/routes.js");
