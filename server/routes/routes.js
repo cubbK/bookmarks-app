@@ -7,23 +7,31 @@ const GOOGLE_CLIENT_SECRET = 'LjoJ3ULlSUbn-MCKtcZfHAKa'
 passport.use(new GoogleStrategy({
   clientID: GOOGLE_CLIENT_ID,
   clientSecret: GOOGLE_CLIENT_SECRET,
-  callbackURL: "http://localhost:3000"
+  callbackURL: "http://localhost:3000/auth/google/callback"
 },
 function(accessToken, refreshToken, profile, done) {
      console.log("YAYA")
+     console.log(accessToken)
+     console.log(profile)
+     return done(accessToken)
 }
 ));
 
 var appRouter = function (app) {
   app.get("/", function(req, res) {
-    res.status(200).send("Welcome to our restful API");
+    res.status(200).send('Base root');
   });
 
-  app.get('/auth', (req, res) => {
-    res.status(200).send("Auth");
-  })
+  app.get('/auth/google', passport.authenticate('google', { scope: ['openid email'] }))
 
-  app.get('/auth/google', passport.authenticate('google', { scope: ['profile'] }))
+  app.get('/auth/google/callback', 
+  passport.authenticate('google', { failureRedirect: '/login' }),
+  function(req, res) {
+    console.log(req)
+    res.redirect('/');
+  });
 }
+
+
 
 module.exports = appRouter
