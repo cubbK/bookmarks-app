@@ -1,5 +1,5 @@
-var passport = require('passport');
-var GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
+const passport = require('passport');
+const GoogleStrategy = require('passport-google-oauth').OAuth2Strategy;
 
 const GOOGLE_CLIENT_ID = process.env.GOOGLE_CLIENT_ID
 const GOOGLE_CLIENT_SECRET = process.env.GOOGLE_CLIENT_SECRET
@@ -17,7 +17,7 @@ function(accessToken, refreshToken, profile, done) {
 }
 ));
 
-var appRouter = function (app) {
+const appRouter = function (app) {
   app.get("/", function(req, res) {
     res.status(200).send('Base root');
   });
