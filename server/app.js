@@ -4,8 +4,14 @@ const bodyParser = require("body-parser");
 const routes = require("./routes/routes.js");
 const app = express();
 
-const mongoose = require('mongoose');
-mongoose.connect('mongodb://' + process.env.MONGO_DB);
+const mysql = require('mysql');
+
+var connection = mysql.createConnection({
+  host     : MYSQL_HOST,
+  user     : MYSQL_USER,
+  password : MYSQL_PASSWORD,
+  database : MYSQL_DB
+});
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
