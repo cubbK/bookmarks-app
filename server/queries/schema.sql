@@ -10,6 +10,6 @@ CREATE TABLE User (
 CREATE TABLE Bookmark (
   link TEXT,
   userId INT,
-  
-  FOREIGN KEY (userId) REFERENCES User(userId), 
-)
+  isSpecial BIT NOT NULL,
+  FOREIGN KEY (userId) REFERENCES User(userId)
+);
