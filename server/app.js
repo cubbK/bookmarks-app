@@ -1,4 +1,6 @@
-require('dotenv-safe').config(); // loads .env file
+require('dotenv-safe').config({
+  allowEmptyValues: true
+}); // loads .env file
 const express = require("express");
 const bodyParser = require("body-parser");
 const routes = require("./routes/routes.js");
@@ -7,10 +9,10 @@ const app = express();
 const mysql = require('mysql');
 
 var connection = mysql.createConnection({
-  host     : MYSQL_HOST,
-  user     : MYSQL_USER,
-  password : MYSQL_PASSWORD,
-  database : MYSQL_DB
+  host     : process.env.MYSQL_HOST,
+  user     : process.env.MYSQL_USER,
+  password : process.env.MYSQL_PASSWORD,
+  database : process.env.MYSQL_DB
 });
 
 app.use(bodyParser.json());
