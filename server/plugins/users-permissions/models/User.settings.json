@@ -38,6 +38,10 @@
       "via": "users",
       "plugin": "users-permissions",
       "configurable": false
+    },
+    "bookmarks": {
+      "collection": "bookmark",
+      "via": "user"
     }
   }
 }
