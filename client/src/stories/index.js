@@ -1,9 +1,14 @@
 import React from 'react'
-// A decorator is a way to wrap a story with a common set of component(s).
-// Here we add the theme decorator to incoporate the Rebass and our custom theme
-import { configure } from '@storybook/react';
+import { configure, addDecorator } from '@storybook/react';
+import CssBaseline from '@material-ui/core/CssBaseline';
 
 const req = require.context('../components', true, /\.stories\.js$/)
+
+const addCssBaseline = storyFn =>
+  <React.Fragment>
+    <CssBaseline />
+    {storyFn()}
+  </React.Fragment >
 
 function loadStories() {
   req.keys().forEach((filename) => req(filename))
