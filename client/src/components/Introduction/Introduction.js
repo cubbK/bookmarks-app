@@ -8,7 +8,7 @@ const Introduction = () =>
         Booky
     </Typography>
     <Typography variant="headline" gutterBottom>
-        A place to store your bookmarks
+        A place to store your bookmarks📚📚📚
     </Typography>
     <Button variant="contained" color="secondary" size="large">
         Log In With Google

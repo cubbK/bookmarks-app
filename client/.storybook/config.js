@@ -1,7 +1,17 @@
-import { configure } from '@storybook/react';
+import React from 'react'
+import { configure, addDecorator } from '@storybook/react';
+import CssBaseline from '@material-ui/core/CssBaseline';
+
+const req = require.context('../src/components', true, /\.stories\.js$/)
+
+const addCssBaseline = storyFn =>
+  <React.Fragment>
+    <CssBaseline />
+    {storyFn()}
+  </React.Fragment >
 
 function loadStories() {
-  require('../src/stories');
+  req.keys().forEach((filename) => req(filename))
 }
 
 configure(loadStories, module);
