@@ -1,17 +1,16 @@
 import React from 'react'
 import { configure, addDecorator } from '@storybook/react';
-import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from '../src/theme/theme'
+import { MuiThemeProvider } from '@material-ui/core/styles';
 
 const req = require.context('../src/components', true, /\.stories\.js$/)
 
-const addCssBaseline = storyFn =>
-  <React.Fragment>
-    <CssBaseline />
-    {storyFn()}
-  </React.Fragment >
+const addTheme = storyFn => <MuiThemeProvider theme={theme}>{storyFn()}</MuiThemeProvider>
+addDecorator(addTheme)
 
 function loadStories() {
   req.keys().forEach((filename) => req(filename))
 }
+
 
 configure(loadStories, module);
