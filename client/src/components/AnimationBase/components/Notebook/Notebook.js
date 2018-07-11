@@ -1,9 +1,11 @@
 import React from 'react'
 import styled from 'styled-components'
+import { secondaryColor } from 'theme/theme'
 
 const Wrapper = styled.div`
   width: ${props => props.width ? props.width : '25vw'} 
   height: ${props => props.height ? props.height : '25vw'}
+  color: ${secondaryColor}
 `
 
 const Notebook = props => 
