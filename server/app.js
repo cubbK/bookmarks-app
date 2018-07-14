@@ -2,12 +2,18 @@ require('dotenv').config()
 const Koa = require('koa')
 
 const app = new Koa()
-const db = require('monk')(process.env.DB)
+const router = require('./controllers/index')
+
+const mongoose = require('mongoose')
+mongoose.connect('mongodb://' + process.env.DB,
+  { useNewUrlParser: true }
+)
 
 // Middlewares
 const compress = require('koa-compress')
 const logger = require('koa-logger')
 const bodyParser = require('koa-bodyparser')
+
 
 // error handling
 app.use(async (ctx, next) => {
@@ -23,11 +29,9 @@ app.use(async (ctx, next) => {
 app.use(logger())
 app.use(compress())
 app.use(bodyParser())
+app.use(router())
 
 app.use(async ctx => {
-  const users = db.get('users')
-  const usersCount = await users.count()
-  console.log(usersCount)
   ctx.body = 'Hello World'
 });
 
