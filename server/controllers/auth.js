@@ -6,13 +6,14 @@ const router = new Router({
 })
 
 router.get('/google',
-  passport.authenticate('google')
+  passport.authenticate('google', { accessType: 'offline' })
 )
 
 router.get('/google/callback',
   passport.authenticate('google', {
     successRedirect: '/',
-    failureRedirect: '/'
+    failureRedirect: '/',
+    accessType: 'offline'
   })
 )
 
