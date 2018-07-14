@@ -3,11 +3,7 @@ const Koa = require('koa')
 
 const app = new Koa()
 const router = require('./controllers/index')
-
-const mongoose = require('mongoose')
-mongoose.connect('mongodb://' + process.env.DB,
-  { useNewUrlParser: true }
-)
+const db = require('./db')
 
 // Middlewares
 const compress = require('koa-compress')
