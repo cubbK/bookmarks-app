@@ -10,6 +10,7 @@ router.get('/', async (ctx, next) => {
 })
 
 router.get('/all', async (ctx, next) => {
+  console.log(ctx)
   const allUsers = await User.getAll()
   ctx.set('Content-Type', 'application/json')
   ctx.body = { users: allUsers }

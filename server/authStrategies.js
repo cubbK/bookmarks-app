@@ -1,18 +1,15 @@
 const passport = require('koa-passport')
 const GoogleStrategy = require('passport-google-auth').Strategy
 
-// passport.serializeUser(function(user, done) {
-//   done(null, user.id)
-// })
+const User = require('./models/user').User
 
-// passport.deserializeUser(async function(id, done) {
-//   try {
-//     const user = await fetchUser()
-//     done(null, user)
-//   } catch(err) {
-//     done(err)
-//   }
-// })
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(user, done) {
+  done(null, user);
+});
 
 passport.use(new GoogleStrategy({
     clientId: process.env.GOOGLE_CLIENT_ID,
@@ -20,9 +17,10 @@ passport.use(new GoogleStrategy({
     callbackURL: 'http://localhost:' + process.env.PORT + '/auth/google/callback'
   },
   function(token, tokenSecret, profile, done) {
-    console.log(token, profile)
+    User.findOrCreate({googleToken: token}, (err, result) => {
+      done(null, result)
+    })
     // retrieve user ...
     // fetchUser().then(user => done(null, user))
-    done(null, {name: 'james'})
   }
 ))
