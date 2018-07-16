@@ -2,13 +2,11 @@ import React from 'react'
 import LoginBtn from 'components/LoginBtn/LoginBtn'
 import { GoogleLogin } from 'react-google-login-component-improved'
 
-const responseGoogle = googleUser => {
-  var id_token = googleUser.getAuthResponse().id_token;
-  var googleId = googleUser.getId();
+const responseGoogle = async googleUser => {
+  var id_token = googleUser.getAuthResponse().id_token
+  var googleId = googleUser.getId()
 
-  console.log({ googleId });
-  console.log({ accessToken: id_token });
-  fetch('http://localhost:1337/auth/google', {
+  const user = await fetch('http://localhost:1337/auth/google', {
     method: 'POST',
     headers: {
       "Content-Type": "application/json; charset=utf-8",
@@ -16,6 +14,7 @@ const responseGoogle = googleUser => {
     },
     body: JSON.stringify({ accessToken: id_token })
   })
+  console.log(await user.json())
   //anything else you want to do(save to localStorage)...
 }
 
