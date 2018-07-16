@@ -1,7 +1,6 @@
 import React from 'react'
 import LoginBtn from 'components/LoginBtn/LoginBtn'
 import { GoogleLogin } from 'react-google-login-component-improved'
-import styled from 'styled-components'
 
 const responseGoogle = googleUser => {
   var id_token = googleUser.getAuthResponse().id_token;
@@ -9,6 +8,14 @@ const responseGoogle = googleUser => {
 
   console.log({ googleId });
   console.log({ accessToken: id_token });
+  fetch('http://localhost:1337/auth/google', {
+    method: 'POST',
+    headers: {
+      "Content-Type": "application/json; charset=utf-8",
+      // "Content-Type": "application/x-www-form-urlencoded",
+    },
+    body: JSON.stringify({ accessToken: id_token })
+  })
   //anything else you want to do(save to localStorage)...
 }
 
