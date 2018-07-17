@@ -1,8 +1,9 @@
 const Router = require('koa-router')
 const passport = require('koa-passport')
 const { OAuth2Client } = require('google-auth-library')
-
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
+
+const User = require('../models/user')
 
 async function verify(token) {
   const ticket = await client.verifyIdToken({
@@ -31,7 +32,9 @@ router.post('/google', async (ctx, next) => {
   try {
 
     const accessToken = ctx.request.body.accessToken
-    const user = await verify(accessToken)
+    const tokenData = await verify(accessToken)
+    
+    const user = await User.findOrCreate(tokenData)
     ctx.response.body = JSON.stringify(user)
 
   } catch(err) {
@@ -39,7 +42,7 @@ router.post('/google', async (ctx, next) => {
     ctx.response.status = 400
     ctx.response.body = {
       error: err.toString()
-    }
+    } 
   }
   
 })

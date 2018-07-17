@@ -12,7 +12,7 @@ const responseGoogle = async googleUser => {
       "Content-Type": "application/json; charset=utf-8",
       // "Content-Type": "application/x-www-form-urlencoded",
     },
-    body: JSON.stringify({ accessToken: 'garbage' })
+    body: JSON.stringify({ accessToken: id_token })
   })
   console.log(await user.json())
   //anything else you want to do(save to localStorage)...
