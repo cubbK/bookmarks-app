@@ -29,12 +29,17 @@ const router = new Router({
 
 router.post('/google', async (ctx, next) => {
   try {
+
     const accessToken = ctx.request.body.accessToken
     const user = await verify(accessToken)
-    console.log(user)
     ctx.response.body = JSON.stringify(user)
+
   } catch(err) {
-    console.log(err)
+
+    ctx.response.status = 400
+    ctx.response.body = {
+      error: err.toString()
+    }
   }
   
 })
