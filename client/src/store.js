@@ -7,6 +7,17 @@ import promiseMiddleware from 'redux-promise-middleware'
 import { composeWithDevTools } from 'redux-devtools-extension'
 import rootReducer from 'reducers'
 
+import { persistStore, persistReducer } from 'redux-persist'
+import storage from 'redux-persist/lib/storage' // defaults to localStorage for web and AsyncStorage for react-native
+
+const persistConfig = {
+  key: 'root',
+  storage,
+  whitelist: ['googleToken'] // only googleToken will be persisted
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
 function errorHandler(error, getState, lastAction, dispatch) {
   console.error(error);
   console.debug('current state', getState());
@@ -14,7 +25,7 @@ function errorHandler(error, getState, lastAction, dispatch) {
   // optionally dispatch an action due to the error using the dispatch parameter
 }
 
-const store = createStore(rootReducer,composeWithDevTools(
+export const store = createStore(persistedReducer,composeWithDevTools(
   applyMiddleware(
     reduxCatch(errorHandler),
     promiseMiddleware(),
@@ -22,4 +33,5 @@ const store = createStore(rootReducer,composeWithDevTools(
   )
 ))
 
-export default store
+export const persistor = persistStore(store)
+
