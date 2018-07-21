@@ -3,32 +3,22 @@ import React from 'react'
 import LoginBtn from 'components/LoginBtn/LoginBtn'
 import { GoogleLogin } from 'react-google-login-component-improved'
 import { connect } from 'react-redux'
-
+import { withRouter } from 'react-router'
+import { compose } from 'ramda'
 import { setToken } from 'actions/tokenActions'
 
 type Props = {
-  setToken: () => mixed
+  setToken: (string) => mixed,
+  history: any
 }
 
 class LoginBtnGoogle extends React.Component<Props> {
 
   responseGoogle = async googleUser => {
-    const id_token: String = googleUser.getAuthResponse().id_token
-    const googleId: String = googleUser.getId()
-    
+    const id_token: string = googleUser.getAuthResponse().id_token
     this.props.setToken(id_token)
+    this.props.history.push('/hey')
 
-    const userRequest = await fetch('http://localhost:1337/auth/google', {
-      method: 'POST',
-      headers: {
-        "Content-Type": "application/json; charset=utf-8",
-        // "Content-Type": "application/x-www-form-urlencoded",
-      },
-      body: JSON.stringify({ accessToken: id_token })
-    })
-    const user = await user.json()
-    
-    //anything else you want to do(save to localStorage)...
   }
 
   render() {
@@ -49,4 +39,7 @@ class LoginBtnGoogle extends React.Component<Props> {
 }
 
 
-export default connect(null, { setToken })(LoginBtnGoogle)
+export default compose(
+  connect(null, { setToken }),
+  withRouter
+)(LoginBtnGoogle)
