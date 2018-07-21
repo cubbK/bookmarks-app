@@ -17,8 +17,6 @@ class LoginBtnGoogle extends React.Component<Props> {
   responseGoogle = async googleUser => {
     const id_token: string = googleUser.getAuthResponse().id_token
     this.props.setToken(id_token)
-    this.props.history.push('/hey')
-
   }
 
   render() {
@@ -39,7 +37,4 @@ class LoginBtnGoogle extends React.Component<Props> {
 }
 
 
-export default compose(
-  connect(null, { setToken }),
-  withRouter
-)(LoginBtnGoogle)
+export default connect(null, { setToken })(LoginBtnGoogle)
