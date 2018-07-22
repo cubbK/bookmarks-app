@@ -1,8 +1,8 @@
 import React from 'react'
-import Header from 'components/Header/Header'
+import HeaderContainer from 'containers/HeaderContainer/HeaderContainer'
 const AppPage = () => (
   <div>
-    <Header />
+    <HeaderContainer />
     AppPage
   </div>
 )

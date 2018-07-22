@@ -65,7 +65,10 @@ class Header extends React.Component<Props, State> {
               onClose={this.toggleDrawer(false)}
               onOpen={this.toggleDrawer(true)}
             >
-              <DrawerList />
+              <DrawerList 
+                onLogoutClick={this.props.onLogoutClick}
+                onProfileClick={this.props.onProfileClick}
+              />
             </SwipeableDrawer>
           </ToolbarStyled>
         </AppBarStyled>
