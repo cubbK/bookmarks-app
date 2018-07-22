@@ -1,5 +1,11 @@
 import React from 'react'
-
-const AppPage = () => <div>123</div>
+import Header from 'components/Header/Header'
+const AppPage = () => (
+  <div>
+    <Header />
+    AppPage
+  </div>
+)
+  
 
 export default AppPage
