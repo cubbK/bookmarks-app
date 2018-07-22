@@ -3,8 +3,7 @@ import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/IconButton'
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
+import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
 import DotsIcon from '@material-ui/icons/MoreHoriz'
 
 import styled from 'styled-components'
@@ -33,22 +32,22 @@ type Props = {
   onProfileClick: () => void
 }
 
-class Header extends React.Component<Props> {
+type State = {
+  drawerOpen: boolean
+}
+
+class Header extends React.Component<Props, State> {
   state = {
-    anchorEl: null,
+    drawerOpen: false
   }
 
-  handleClick = event => {
-    this.setState({ anchorEl: event.currentTarget });
-  }
-
-  handleClose = () => {
-    this.setState({ anchorEl: null });
+  toggleDrawer = (isOpen : boolean) => () => {
+    this.setState({
+      drawerOpen: isOpen
+    })
   }
 
   render() {
-    const { anchorEl } = this.state
-
     return (
       <header>
         <AppBarStyled position='sticky'>
@@ -57,21 +56,19 @@ class Header extends React.Component<Props> {
               Logo
             </div>
             <WhiteButton
-              aria-owns={anchorEl ? 'simple-menu' : null}
               aria-haspopup="true"
-              onClick={this.handleClick}
+              onClick={this.toggleDrawer(true)}
             >
               <DotsIcon />
             </WhiteButton>
-            <Menu
-              id="simple-menu"
-              anchorEl={anchorEl}
-              open={Boolean(anchorEl)}
-              onClose={this.handleClose}
+            <SwipeableDrawer
+              anchor="right"
+              open={this.state.drawerOpen}
+              onClose={this.toggleDrawer(false)}
+              onOpen={this.toggleDrawer(true)}
             >
-              <MenuItem onClick={this.props.onProfileClick}>Profile</MenuItem>
-              <MenuItem onClick={this.props.onLogoutClick}>Logout</MenuItem>
-            </Menu>
+              123
+            </SwipeableDrawer>
           </ToolbarStyled>
         </AppBarStyled>
         <LongDiv>Hey from longidv</LongDiv>
