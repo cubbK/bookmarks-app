@@ -5,7 +5,7 @@ export const secondaryColor = '#f22b29'
 export const errorColor = '#545454'
 export const whiteColor = '#eff1ed'
 
-const theme = createMuiTheme({
+export const muiTheme = createMuiTheme({
   palette: {
     primary: {
       main: mainColor,
@@ -17,6 +17,11 @@ const theme = createMuiTheme({
       main: errorColor
     }
   },
-});
+})
 
-export default theme
+export const styledTheme = {
+  mainColor,
+  secondaryColor,
+  errorColor,
+  whiteColor
+}

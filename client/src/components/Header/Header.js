@@ -4,14 +4,12 @@ import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
 import Button from '@material-ui/core/IconButton'
 import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
-import DotsIcon from '@material-ui/icons/MoreHoriz'
+import MenuIcon from '@material-ui/icons/Menu'
+
+import DrawerList from './components/DrawerList/DrawerList'
 
 import styled from 'styled-components'
 import { whiteColor } from 'theme/theme'
-
-const LongDiv = styled.div`
-  height: 2000px;
-`
 
 const AppBarStyled = styled(AppBar)`
 `
@@ -59,7 +57,7 @@ class Header extends React.Component<Props, State> {
               aria-haspopup="true"
               onClick={this.toggleDrawer(true)}
             >
-              <DotsIcon />
+              <MenuIcon />
             </WhiteButton>
             <SwipeableDrawer
               anchor="right"
@@ -67,11 +65,10 @@ class Header extends React.Component<Props, State> {
               onClose={this.toggleDrawer(false)}
               onOpen={this.toggleDrawer(true)}
             >
-              123
+              <DrawerList />
             </SwipeableDrawer>
           </ToolbarStyled>
         </AppBarStyled>
-        <LongDiv>Hey from longidv</LongDiv>
       </header>
     )
   }

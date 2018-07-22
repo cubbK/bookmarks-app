@@ -7,17 +7,24 @@ import { Provider } from 'react-redux'
 import { PersistGate } from 'redux-persist/integration/react'
 import { store, persistor } from './store'
 import { BrowserRouter as Router } from 'react-router-dom'
-import CssBaseline from '@material-ui/core/CssBaseline';
+import CssBaseline from '@material-ui/core/CssBaseline'
+import { muiTheme, styledTheme } from '../src/theme/theme'
+import { MuiThemeProvider } from '@material-ui/core/styles'
+import { ThemeProvider } from 'styled-components'
 
-const AppWrapped = props => 
+const AppWrapped = props =>
   <Provider store={store}>
     <PersistGate loading={null} persistor={persistor}>
-      <Router>
-        <React.Fragment>
-          <CssBaseline />
-          <App />
-        </React.Fragment>
-      </Router>
+      <MuiThemeProvider theme={muiTheme}>
+        <ThemeProvider theme={styledTheme}>
+          <Router>
+            <React.Fragment>
+              <CssBaseline />
+              <App />
+            </React.Fragment>
+          </Router>
+        </ThemeProvider>
+      </MuiThemeProvider>
     </PersistGate>
   </Provider>
 

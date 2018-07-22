@@ -1,13 +1,16 @@
 import React from 'react'
 import { configure, addDecorator } from '@storybook/react';
-import theme from '../src/theme/theme'
+import { muiTheme, styledTheme } from '../src/theme/theme'
 import { MuiThemeProvider } from '@material-ui/core/styles';
+import { ThemeProvider } from 'styled-components'
 
 const req = require.context('../src/', true, /\.stories\.js$/)
 
 const addTheme = storyFn =>
-  <MuiThemeProvider theme={theme}>
-    {storyFn()}
+  <MuiThemeProvider theme={muiTheme}>
+    <ThemeProvider theme={styledTheme}>
+      {storyFn()}
+    </ThemeProvider>
   </MuiThemeProvider>
 
 addDecorator(addTheme)
