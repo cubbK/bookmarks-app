@@ -2,9 +2,10 @@
 import React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import Button from '@material-ui/core/Button'
+import Button from '@material-ui/core/IconButton'
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
+import DotsIcon from '@material-ui/icons/MoreHoriz'
 
 import styled from 'styled-components'
 import { whiteColor } from 'theme/theme'
@@ -16,9 +17,14 @@ const LongDiv = styled.div`
 const AppBarStyled = styled(AppBar)`
 `
 
+const ToolbarStyled = styled(Toolbar)`
+  display: flex;
+  justify-content: space-between;
+`
+
 const WhiteButton = styled(Button)`
   && {
-    color: ${whiteColor}
+    color: ${whiteColor};
   }
 `
 
@@ -27,7 +33,7 @@ type Props = {
   onProfileClick: () => void
 }
 
-class Header extends React.Component {
+class Header extends React.Component<Props> {
   state = {
     anchorEl: null,
   }
@@ -46,7 +52,7 @@ class Header extends React.Component {
     return (
       <header>
         <AppBarStyled position='sticky'>
-          <Toolbar>
+          <ToolbarStyled>
             <div>
               Logo
             </div>
@@ -55,7 +61,7 @@ class Header extends React.Component {
               aria-haspopup="true"
               onClick={this.handleClick}
             >
-              Open Menu
+              <DotsIcon />
             </WhiteButton>
             <Menu
               id="simple-menu"
@@ -66,7 +72,7 @@ class Header extends React.Component {
               <MenuItem onClick={this.props.onProfileClick}>Profile</MenuItem>
               <MenuItem onClick={this.props.onLogoutClick}>Logout</MenuItem>
             </Menu>
-          </Toolbar>
+          </ToolbarStyled>
         </AppBarStyled>
         <LongDiv>Hey from longidv</LongDiv>
       </header>
