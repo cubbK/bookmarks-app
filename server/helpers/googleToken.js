@@ -1,11 +1,7 @@
-const Router = require('koa-router')
-const passport = require('koa-passport')
 const { OAuth2Client } = require('google-auth-library')
 const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
 
-const User = require('../models/user')
-
-async function verify(token) {
+async function verifyGoogleToken(token) {
   const ticket = await client.verifyIdToken({
     idToken: token,
     audience: process.env.GOOGLE_CLIENT_ID,  // Specify the CLIENT_ID of the app that accesses the backend
@@ -23,28 +19,20 @@ async function verify(token) {
   }
 }
 
-
-const router = new Router({
-  prefix: '/auth'
-})
-
-router.post('/google', async (ctx, next) => {
+async function getGoogleTokenData(ctx, next) {
   try {
 
-    const accessToken = ctx.request.body.accessToken
-    const tokenData = await verify(accessToken)
+    const accessToken = ctx.request.header.accesstoken
+    const tokenData = await verifyGoogleToken(accessToken)
     
-    const user = await User.findOrCreate(tokenData)
-    ctx.response.body = JSON.stringify(user)
+    ctx.googleTokenData = tokenData
 
   } catch(err) {
-
-    ctx.response.status = 400
-    ctx.response.body = {
-      error: err.toString()
-    } 
+    console.log(err.toString())
+    ctx.throw(400, err.toString())
   }
-  
-})
+  return next()
+}
 
-module.exports = router
+exports.verifyGoogleToken = verifyGoogleToken
+exports.getGoogleTokenData = getGoogleTokenData
