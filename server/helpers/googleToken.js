@@ -1,5 +1,8 @@
 const { OAuth2Client } = require('google-auth-library')
-const client = new OAuth2Client(process.env.GOOGLE_CLIENT_ID)
+const client = new OAuth2Client({
+  clientId: process.env.GOOGLE_CLIENT_ID,
+  clientSecret: process.env.GOOGLE_SECRET
+})
 
 async function verifyGoogleToken(token) {
   const ticket = await client.verifyIdToken({
@@ -9,6 +12,7 @@ async function verifyGoogleToken(token) {
     //[CLIENT_ID_1, CLIENT_ID_2, CLIENT_ID_3]
   });
   const payload = ticket.getPayload();
+  console.log(payload)
   const userId = payload['sub'];
   const userEmail = payload.email
   // If request specified a G Suite domain:
@@ -24,10 +28,10 @@ async function getGoogleTokenData(ctx, next) {
 
     const accessToken = ctx.request.header.accesstoken
     const tokenData = await verifyGoogleToken(accessToken)
-    
+
     ctx.googleTokenData = tokenData
 
-  } catch(err) {
+  } catch (err) {
     console.log(err.toString())
     ctx.throw(400, err.toString())
   }

@@ -3,8 +3,8 @@ import React from 'react'
 import Button from '@material-ui/core/Button'
 
 type Props = {
-  color: String,
-  name: String,
+  color: string,
+  name: string,
 }
 
 const LoginBtn = (props: Props) =>
@@ -12,6 +12,7 @@ const LoginBtn = (props: Props) =>
     variant="contained"
     color={props.color}
     size="large"
+    { ...props }
   >
     Log In With {props.name}
   </Button>
