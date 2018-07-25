@@ -7,6 +7,9 @@ import { withRouter } from 'react-router'
 import { compose } from 'ramda'
 import { setToken } from 'actions/tokenActions'
 
+import axios from 'axios'
+import { apiUrl } from 'globals.js'
+
 type Props = {
   setToken: (string) => mixed,
   history: any
@@ -18,7 +21,16 @@ class LoginBtnGoogle extends React.Component<Props> {
     // const id_token: string = googleUser.getAuthResponse().id_token
     // console.log(googleUser.getAuthResponse())
     // this.props.setToken(id_token)
-    console.log(code)
+      try {
+        const result = await axios.get(`${apiUrl}googleUser/`, {
+          headers: {
+            code: code
+          }
+        })
+        console.log(result)
+      } catch (err) {
+        console.log(err.response)
+      }
   }
 
   onFailure = err => console.log(err)
@@ -32,7 +44,7 @@ class LoginBtnGoogle extends React.Component<Props> {
         clientId="870438236090-8b8r45h1rkcfe0en949a4pqn35iougjo.apps.googleusercontent.com"
         scope="profile"
         prompt= "consent"
-        fetchBasicProfile={false}
+        fetchBasicProfile={true}
         accessType="offline"
         responseType="code"
         onSuccess={this.onSuccess}

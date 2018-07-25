@@ -8,9 +8,9 @@ const getGoogleTokenData = require('../helpers/googleToken').getGoogleTokenData
 router.use(getGoogleTokenData)
 
 router.get('/', async (ctx, next) => {
-  const user = await User.findOrCreate(ctx.googleTokenData)
+  // const user = await User.findOrCreate(ctx.googleTokenData)
   
-  ctx.response.body = JSON.stringify(user)
+  // ctx.response.body = JSON.stringify(user)
   return next()
 })
 
