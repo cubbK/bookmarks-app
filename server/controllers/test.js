@@ -5,6 +5,5 @@ const router = new Router({
 })
 
 router.get('/', async (ctx, next) => {
-  console.log(ctx)
   return next()
 })
