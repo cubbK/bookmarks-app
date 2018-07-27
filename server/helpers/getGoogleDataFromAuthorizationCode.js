@@ -1,9 +1,9 @@
-const {google} = require('googleapis')
+const { google } = require('googleapis')
 
 const oauth2Client = new google.auth.OAuth2(
   process.env.GOOGLE_CLIENT_ID,
   process.env.GOOGLE_SECRET,
-  "https%3A%2F%2Fdevelopers.google.com%2Foauthplayground"
+  "http://localhost:1337/googleUser/redirect"
 )
 
 google.options({
@@ -16,9 +16,13 @@ async function getGoogleTokenData(ctx, next) {
 
     const code = ctx.request.header.code
     console.log('code: ', code)
-    const tokenData = await oauth2Client.getToken(123)
-    console.log('token data', tokenData)
-    ctx.googleTokenData = tokenData
+
+    const { tokens } = await oauth2Client.getToken(code)
+    // const { tokens } = await oauth2Client.getToken(code)
+    // oauth2Client.setCredentials(tokens);
+    // cons
+    // ctx.googleTokenData = tokenData
+    console.log('pass through getGoogleTokenData')
 
   } catch (err) {
     console.log(err.toString())
@@ -27,4 +31,4 @@ async function getGoogleTokenData(ctx, next) {
   return next()
 }
 
-exports.getGoogleTokenData = getGoogleTokenData
+module.exports = getGoogleTokenData

@@ -8,7 +8,7 @@ import { compose } from 'ramda'
 import { setToken } from 'actions/tokenActions'
 
 import axios from 'axios'
-import { apiUrl } from 'globals.js'
+import { apiUrl, CLIENT_ID } from 'globals.js'
 
 type Props = {
   setToken: (string) => mixed,
@@ -21,6 +21,7 @@ class LoginBtnGoogle extends React.Component<Props> {
     // const id_token: string = googleUser.getAuthResponse().id_token
     // console.log(googleUser.getAuthResponse())
     // this.props.setToken(id_token)
+    console.log(code)
     try {
       const result = await axios.get(`${apiUrl}googleUser/`, {
         headers: {
@@ -37,27 +38,18 @@ class LoginBtnGoogle extends React.Component<Props> {
 
   renderBtn = props => <LoginBtn onClick={props.onClick} />
 
-  encodedUri = () => {
-    const encodedUriString = encodeURI("https://developers.google.com/oauthplayground")
-    console.log(encodedUriString)
-    return encodedUriString
-  }
-
   render() {
     return (
       <GoogleLogin
-        clientId="870438236090-8b8r45h1rkcfe0en949a4pqn35iougjo.apps.googleusercontent.com"
+        clientId={CLIENT_ID}
         scope="profile"
-        prompt="consent"
-        fetchBasicProfile={true}
-        accessType="offline"
         responseType="code"
         onSuccess={this.onSuccess}
         onFailure={this.onFailure}
         render={this.renderBtn}
 
         uxMode="redirect"
-        redirectUri="https://developers.google.com/oauthplayground"
+        redirectUri={`${apiUrl}googleUser/redirect`}
       >
       </GoogleLogin>
     )
