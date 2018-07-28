@@ -15,14 +15,11 @@ async function getGoogleTokenData(ctx, next) {
   try {
 
     const code = ctx.request.header.code
-    console.log('code: ', code)
     const { tokens } = await oauth2Client.getToken(code)
-    // const { tokens } = await oauth2Client.getToken(code)
-    // oauth2Client.setCredentials(tokens);
-    // cons
-    // ctx.googleTokenData = tokenData
-    console.log(tokens)
+    oauth2Client.setCredentials(tokens)
+    
     ctx.googleTokens = tokens
+
   } catch (err) {
     console.log(err.toString())
     ctx.throw(400, err)
