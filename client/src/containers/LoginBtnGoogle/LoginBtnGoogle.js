@@ -1,7 +1,7 @@
 // @flow
 import React from 'react'
 import LoginBtn from 'components/LoginBtn/LoginBtn'
-import { GoogleLogin } from 'react-google-login'
+import GoogleLogin from 'containers/GoogleLogin/GoogleLogin'
 import { connect } from 'react-redux'
 import { withRouter } from 'react-router'
 import { compose } from 'ramda'
@@ -42,14 +42,13 @@ class LoginBtnGoogle extends React.Component<Props> {
     return (
       <GoogleLogin
         clientId={CLIENT_ID}
-        scope="profile"
         responseType="code"
+        accessType="offline"
         onSuccess={this.onSuccess}
         onFailure={this.onFailure}
         render={this.renderBtn}
-
         uxMode="redirect"
-        redirectUri={`${apiUrl}googleUser/redirect`}
+        redirectUri="http://localhost:3000/heyyousuckers"
       >
       </GoogleLogin>
     )
