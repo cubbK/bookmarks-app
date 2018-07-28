@@ -14,10 +14,4 @@ router.get('/', async (ctx, next) => {
   return next()
 })
 
-router.get('/redirect', async (ctx, next) => {
-  console.log('redirected')
-
-  return next()
-})
-
 module.exports = router

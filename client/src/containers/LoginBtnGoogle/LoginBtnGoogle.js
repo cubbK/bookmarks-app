@@ -8,7 +8,7 @@ import { compose } from 'ramda'
 import { setToken } from 'actions/tokenActions'
 
 import axios from 'axios'
-import { apiUrl, CLIENT_ID } from 'globals.js'
+import { GOOGLE_CLIENT_ID, GOOGLE_REDIRECT_URI } from 'globals.js'
 
 type Props = {
   setToken: (string) => mixed,
@@ -21,36 +21,13 @@ const googleUrlWithSpaces = `
   &scope=profile&
   prompt=consent&
   response_type=code&
-  client_id=${CLIENT_ID}&
-  redirect_uri=http://localhost:3000/
+  client_id=${GOOGLE_CLIENT_ID}&
+  redirect_uri=${GOOGLE_REDIRECT_URI}
 `
 
 const googleUrl = googleUrlWithSpaces.replace(/\s/g, '')
 
-console.log(googleUrl)
-
 class LoginBtnGoogle extends React.Component<Props> {
-
-  onSuccess = async ({ code }) => {
-    // const id_token: string = googleUser.getAuthResponse().id_token
-    // console.log(googleUser.getAuthResponse())
-    // this.props.setToken(id_token)
-    console.log(code)
-    try {
-      const result = await axios.get(`${apiUrl}googleUser/`, {
-        headers: {
-          code: code
-        }
-      })
-      console.log(result)
-    } catch (err) {
-      console.log(err.response)
-    }
-  }
-
-  onFailure = err => console.log(err)
-
-  renderBtn = props => <LoginBtn onClick={props.onClick} />
 
   render() {
     return (
