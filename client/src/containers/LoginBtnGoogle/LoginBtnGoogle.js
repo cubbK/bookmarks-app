@@ -15,6 +15,20 @@ type Props = {
   history: any
 }
 
+const googleUrlWithSpaces = `
+  https://accounts.google.com/o/oauth2/v2/auth?
+  access_type=offline
+  &scope=profile&
+  prompt=consent&
+  response_type=code&
+  client_id=${CLIENT_ID}&
+  redirect_uri=http://localhost:3000/
+`
+
+const googleUrl = googleUrlWithSpaces.replace(/\s/g, '')
+
+console.log(googleUrl)
+
 class LoginBtnGoogle extends React.Component<Props> {
 
   onSuccess = async ({ code }) => {
@@ -40,17 +54,9 @@ class LoginBtnGoogle extends React.Component<Props> {
 
   render() {
     return (
-      <GoogleLogin
-        clientId={CLIENT_ID}
-        responseType="code"
-        accessType="offline"
-        onSuccess={this.onSuccess}
-        onFailure={this.onFailure}
-        render={this.renderBtn}
-        uxMode="redirect"
-        redirectUri="http://localhost:3000/heyyousuckers"
-      >
-      </GoogleLogin>
+      <a
+        href={googleUrl}
+      >login</a>
     )
 
   }
