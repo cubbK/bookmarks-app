@@ -11,10 +11,13 @@ google.options({
   auth: oauth2Client
 });
 
+// expects ctx.request.header.code to exist
+// decode the code and sets ctx.googleTokens with the decoded information
 async function getGoogleTokenData(ctx, next) {
   try {
-
+    console.log("a venit")
     const code = ctx.request.header.code
+    console.log('cod  ', code)
     const { tokens } = await oauth2Client.getToken(code)
     oauth2Client.setCredentials(tokens)
     

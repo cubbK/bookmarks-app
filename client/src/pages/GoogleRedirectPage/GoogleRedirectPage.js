@@ -7,15 +7,17 @@ class GoogleRedirectPage extends React.Component {
   componentDidMount() {
     const params = queryString.parse(window.location.search)
     console.log(params)
-    axios.get(`${API_URL}googleUser/`, {
+    const requestUrl = `${API_URL}googleUser/`
+    axios.get(requestUrl, {
       headers: {
         code: params.code
-      }
+      } 
     })
+
   }
 
   render () {
-    return 123
+    return 5677
   }
 }
 
