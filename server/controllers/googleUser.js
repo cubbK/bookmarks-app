@@ -11,11 +11,16 @@ router.use(getGoogleDataFromAuthorizationCode)
 
 router.get('/', async (ctx, next) => {
   // const user = await User.findOrCreate(ctx.googleTokenData)
-  console.log('yo')
   console.log(ctx.googleTokens)
   
-  const decodedToken = jwtDecode(ctx.googleTokens.id_token)
-  console.log(decodedToken)
+  const refreshToken = ctx.googleTokens.refresh_token
+  const accessToken = ctx.googleTokens.access_token
+
+  const userInfo = jwtDecode(ctx.googleTokens.id_token)
+  const userId = userInfo.sub
+  const userName = userInfo.given_name
+
+  console.log('decoded token: ', decodedToken)
   ctx.response.body = '123'
   // ctx.response.body = JSON.stringify(user)
   return next()

@@ -15,9 +15,7 @@ google.options({
 // decode the code and sets ctx.googleTokens with the decoded information
 async function getGoogleTokenData(ctx, next) {
   try {
-    console.log("a venit")
     const code = ctx.request.header.code
-    console.log('cod  ', code)
     const { tokens } = await oauth2Client.getToken(code)
     oauth2Client.setCredentials(tokens)
     
