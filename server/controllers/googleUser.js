@@ -10,8 +10,6 @@ const getGoogleDataFromAuthorizationCode = require("../helpers/getGoogleDataFrom
 router.use(getGoogleDataFromAuthorizationCode);
 
 router.get("/", async (ctx, next) => {
-  // const user = await User.findOrCreate(ctx.googleTokenData)
-  console.log(ctx.googleTokens);
   try {
     const refreshToken = ctx.googleTokens.refresh_token;
     const accessToken = ctx.googleTokens.access_token;
@@ -20,18 +18,22 @@ router.get("/", async (ctx, next) => {
     const userId = userInfo.sub;
     const userName = userInfo.given_name;
 
+    
     const retrievedUser = await User.findOrCreateByGoogleId(userId);
-    User.setUserField(userId, "googleAccessToken", accessToken);
+    await User.setUserField(userId, "googleRefreshToken", refreshToken);
+    
+
 
     const responseObject = {
       googleId: retrievedUser.googleId,
-      googleAccessToken: accessToken
+      googleAccessToken: accessToken,
       links: retrievedUser.links
     }
 
     ctx.response.body = JSON.stringify(responseObject);
   } catch (err) {
     console.log(err);
+    ctx.throw(400, "Cannot get user")
   }
 
   return next();

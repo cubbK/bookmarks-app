@@ -26,7 +26,10 @@ exports.getAll = async () => {
 };
 
 exports.setUserField = (googleId, field, value) => {
-  User.update({ googleId }, { [field]: value });
+  const fieldsToUpdate = { [field]: value }
+  return User.update({ googleId }, fieldsToUpdate, function (err, raw) {
+    if (err) return err
+  }).exec()
 };
 
 // Every google account has a unique id which is sub field in decoded token
