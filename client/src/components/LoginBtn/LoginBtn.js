@@ -14,7 +14,8 @@ const LoginBtn = (props: Props) =>
     size="large"
     { ...props }
   >
-    Log In With {props.name}
+    { props.children ? props.children : `Log In With ${props.name}` }
+    
   </Button>
 
 LoginBtn.defaultProps = {
