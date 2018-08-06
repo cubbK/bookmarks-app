@@ -1,6 +1,6 @@
 export default (state = null, action) => {
   switch (action.type) {
-    case 'SET_TOKEN' :
+    case 'SET_GOOGLE_TOKEN' :
       return action.payload
       
     default: return state 

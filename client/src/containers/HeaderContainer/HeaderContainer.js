@@ -1,13 +1,13 @@
 import React from 'react'
 import Header from 'components/Header/Header'
 import { connect } from 'react-redux'
-import { setToken } from 'actions/tokenActions'
+import { setGoogleToken } from 'actions/tokenActions'
 
 class HeaderContainer extends React.Component {
 
   onLogoutClick = () => {
     console.log('logout')
-    this.props.setToken(null)
+    this.props.setGoogleToken(null)
   }
 
   onProfileClick = () => {
@@ -25,4 +25,4 @@ class HeaderContainer extends React.Component {
   }
 }
 
-export default connect(null, {setToken})(HeaderContainer)
+export default connect(null, {setGoogleToken})(HeaderContainer)

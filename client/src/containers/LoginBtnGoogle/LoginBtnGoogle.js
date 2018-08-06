@@ -1,19 +1,8 @@
-// @flow
 import React from 'react'
 import LoginBtn from 'components/LoginBtn/LoginBtn'
-import GoogleLogin from 'containers/GoogleLogin/GoogleLogin'
-import { connect } from 'react-redux'
-import { withRouter } from 'react-router'
-import { compose } from 'ramda'
-import { setToken } from 'actions/tokenActions'
 
-import axios from 'axios'
 import { GOOGLE_CLIENT_ID, GOOGLE_REDIRECT_URI } from 'globals.js'
 
-type Props = {
-  setToken: (string) => mixed,
-  history: any
-}
 
 const googleUrlWithSpaces = `
   https://accounts.google.com/o/oauth2/v2/auth?
@@ -27,7 +16,7 @@ const googleUrlWithSpaces = `
 
 const googleUrl = googleUrlWithSpaces.replace(/\s/g, '')
 
-class LoginBtnGoogle extends React.Component<Props> {
+class LoginBtnGoogle extends React.Component {
 
   render() {
     return (
@@ -40,4 +29,4 @@ class LoginBtnGoogle extends React.Component<Props> {
 }
 
 
-export default connect(null, { setToken })(LoginBtnGoogle)
+export default LoginBtnGoogle
