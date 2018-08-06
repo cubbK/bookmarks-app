@@ -4,7 +4,6 @@ import LinkListContainer from "./containers/LinkListContainer/LinkListContainer"
 
 class AppPage extends React.Component {
   render() {
-    console.log(this.props)
     return (
       <div>
         <HeaderContainer />
