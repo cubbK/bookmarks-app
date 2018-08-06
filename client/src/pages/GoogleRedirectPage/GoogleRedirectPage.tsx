@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from 'react';
 import queryString from "query-string";
 import { API_URL } from "globals.js";
 import axios from "axios";

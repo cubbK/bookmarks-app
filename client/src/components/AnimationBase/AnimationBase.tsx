@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import { Spring } from 'react-spring'
 import styled from 'styled-components'
 import { secondaryColor } from 'theme/theme'

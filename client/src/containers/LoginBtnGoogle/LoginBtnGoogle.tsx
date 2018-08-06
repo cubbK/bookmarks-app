@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from 'react';
 import LoginBtn from "components/LoginBtn/LoginBtn";
 
 import { GOOGLE_CLIENT_ID, GOOGLE_REDIRECT_URI } from "globals.js";

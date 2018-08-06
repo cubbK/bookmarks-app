@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from 'react';
 import { Route, withRouter, Switch } from "react-router";
 import { connect } from "react-redux";
 import { compose } from "redux";
@@ -6,7 +6,11 @@ import Homepage from "./pages/Homepage/Homepage";
 import AppPage from "./pages/AppPage/AppPage";
 import GoogleRedirectPage from "./pages/GoogleRedirectPage/GoogleRedirectPage";
 
-const App = props => (
+type Props = {
+  googleToken: string
+}
+
+const App = (props: Props) => (
   <React.Fragment>
     <Switch>
     <Route
@@ -20,6 +24,9 @@ const App = props => (
   </React.Fragment>
 );
 
-export default withRouter(connect(state => ({
-  googleToken: state.googleToken
-}))(App));
+export default compose(
+  withRouter,
+  connect(state => ({
+    googleToken: state.googleToken
+  }))
+)(App);

@@ -1,4 +1,4 @@
-import React from 'react'
+import * as React from 'react'
 import Header from 'components/Header/Header'
 import { connect } from 'react-redux'
 import { setGoogleToken } from 'actions/tokenActions'
