@@ -1,10 +1,11 @@
-import * as React from 'react'
+import * as React from "react";
 
-const LinkList = props =>
+const LinkList = props => (
   <div>
-    {
-      props.linkArr.map(link => <li key={link}>link</li>)
-    }
+    {props.linkArr.map(link => (
+      <li key={link}>link</li>
+    ))}
   </div>
+);
 
-export default LinkList
+export default LinkList;

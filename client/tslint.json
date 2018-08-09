@@ -1,9 +1,12 @@
 {
-  "extends": ["tslint-config-standard", "tslint-react"],
+  "extends": ["tslint-react", "prettier-tslint"],
   "rules": {
     "no-console": false,
     "ordered-imports": false,
-    "trailing-comma": false
+    "trailing-comma": false,
+    "object-literal-sort-keys": false,
+    "semicolon": false,
+    "jsx-no-multiline-js": false
   },
   "linterOptions": {
     "exclude": [
