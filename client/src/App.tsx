@@ -5,28 +5,33 @@ import { compose } from "redux";
 import Homepage from "./pages/Homepage/Homepage";
 import AppPage from "./pages/AppPage/AppPage";
 import GoogleRedirectPage from "./pages/GoogleRedirectPage/GoogleRedirectPage";
+import { IStoreState } from 'types'
 
-type Props = {
+interface IProps {
   googleToken: string
 }
 
-const App = (props: Props) => (
+const NoMatch = () => <div>
+  No match
+</div>
+
+const App = (props: IProps) => (
   <React.Fragment>
     <Switch>
     <Route
-      exact
+      exact={true}
       path="/"
       component={props.googleToken ? AppPage : Homepage}
     />
-    <Route exact path="/googleRedirect/" component={GoogleRedirectPage} />
-    <Route component={props=> 'no match'} />
+    <Route exact={true} path="/googleRedirect/" component={GoogleRedirectPage} />
+    <Route component={NoMatch} />
     </Switch>
   </React.Fragment>
 );
 
 export default compose(
   withRouter,
-  connect(state => ({
+  connect((state: IStoreState) => ({
     googleToken: state.googleToken
   }))
 )(App);

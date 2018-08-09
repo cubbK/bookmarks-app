@@ -8,12 +8,12 @@
     {
       "type": "chrome",
       "request": "launch",
-      "name": "Launch Chrome to test create react app on port 3000",
+      "name": "Launch client",
       "url": "http://localhost:3000",
       "webRoot": "${workspaceFolder}"
     },
     {
-      "name": "Launch custom config stackover",
+      "name": "Launch server ",
       "type": "node",
       "request": "launch",
       "program": "${workspaceRoot}/server/app.js",
@@ -27,12 +27,6 @@
         "NODE_ENV": "development"
       },
       "sourceMaps": false
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Launch Program",
-      "program": "${file}"
     }
   ]
 }

@@ -1,4 +1,3 @@
-// @flow
 import * as React from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
@@ -25,27 +24,21 @@ const WhiteButton = styled(Button)`
   }
 `
 
-type Props = {
+interface IProps {
   onLogoutClick: () => void,
   onProfileClick: () => void
 }
 
-type State = {
+interface IState {
   drawerOpen: boolean
 }
 
-class Header extends React.Component<Props, State> {
-  state = {
+class Header extends React.Component<IProps, IState> {
+  public state = {
     drawerOpen: false
   }
 
-  toggleDrawer = (isOpen : boolean) => () => {
-    this.setState({
-      drawerOpen: isOpen
-    })
-  }
-
-  render() {
+  public render() {
     return (
       <header>
         <AppBarStyled position='sticky'>
@@ -74,6 +67,12 @@ class Header extends React.Component<Props, State> {
         </AppBarStyled>
       </header>
     )
+  }
+
+  private toggleDrawer = (isOpen : boolean) => () => {
+    this.setState({
+      drawerOpen: isOpen
+    })
   }
 }
 

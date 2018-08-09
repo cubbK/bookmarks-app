@@ -2,16 +2,24 @@ import * as React from 'react';
 import queryString from "query-string";
 import { API_URL } from "globals.js";
 import axios from "axios";
-import { setGoogleToken } from "actions/tokenActions";
+import { setGoogleToken, ISetGoogleTokenReturn } from "actions/tokenActions";
 import { connect } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 
-class GoogleRedirectPage extends React.Component {
-  state = {
+interface IProps {
+  setGoogleToken: (token: string) => ISetGoogleTokenReturn
+}
+
+class GoogleRedirectPage extends React.Component<IProps> {
+  public state = {
     toRedirect: false
   };
 
-  async componentDidMount() {
+  public render() {
+    return this.state.toRedirect ? <Redirect to="/" />: 'Loading';
+  }
+
+  public async componentDidMount() {
     const params = queryString.parse(window.location.search);
     const requestUrl = `${API_URL}googleUser/`;
     try {
@@ -27,10 +35,6 @@ class GoogleRedirectPage extends React.Component {
     } catch (err) {
       console.log(err);
     }
-  }
-
-  render() {
-    return this.state.toRedirect ? <Redirect to="/" />: 'Loading';
   }
 }
 

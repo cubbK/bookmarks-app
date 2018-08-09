@@ -3,19 +3,13 @@ import Header from 'components/Header/Header'
 import { connect } from 'react-redux'
 import { setGoogleToken } from 'actions/tokenActions'
 
-class HeaderContainer extends React.Component {
+interface IProps {
+  setGoogleToken: (token: string | null) => void
+}
 
-  onLogoutClick = () => {
-    console.log('logout')
-    this.props.setGoogleToken(null)
-  }
+class HeaderContainer extends React.Component<IProps> {
 
-  onProfileClick = () => {
-    console.log('profile')
-    console.log('does nothing yet')
-  }
-
-  render () {
+  public render () {
     return (
       <Header 
         onLogoutClick={this.onLogoutClick}  
@@ -23,6 +17,18 @@ class HeaderContainer extends React.Component {
       />
     )
   }
+
+  private onLogoutClick = () => {
+    console.log('logout')
+    this.props.setGoogleToken(null)
+  }
+
+  private onProfileClick = () => {
+    console.log('profile')
+    console.log('does nothing yet')
+  }
+
+  
 }
 
 export default connect(null, {setGoogleToken})(HeaderContainer)

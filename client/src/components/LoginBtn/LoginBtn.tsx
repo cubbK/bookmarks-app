@@ -1,13 +1,14 @@
-// @flow
 import * as React from 'react'
 import Button from '@material-ui/core/Button'
 
-type Props = {
-  color: string,
-  name: string,
+interface IProps {
+  color?: "inherit" | "primary" | "secondary" | "default" | undefined,
+  name?: string,
+  children?: any,
+  onClick?: () => void
 }
 
-const LoginBtn = (props: Props) =>
+const LoginBtn: React.SFC<IProps> = (props) =>
   <Button
     variant="contained"
     color={props.color}

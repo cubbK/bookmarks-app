@@ -1,12 +1,12 @@
 import * as React from 'react'
-
+import { IStoreState } from 'types'
 
 import { connect } from 'react-redux'
 
 class LinkListContainer extends React.Component {
  
 
-  render() {
+  public render() {
     return (
       <div>LinkContainerList</div>
     )
@@ -14,7 +14,7 @@ class LinkListContainer extends React.Component {
 }
 
 export default connect(
-  state => ({
+  (state: IStoreState) => ({
     googleToken: state.googleToken
   })
 )(LinkListContainer)

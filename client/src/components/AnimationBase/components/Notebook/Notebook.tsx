@@ -1,19 +1,24 @@
-import * as React from 'react'
-import styled from 'styled-components'
-import { secondaryColor } from 'theme/theme'
+import * as React from "react";
+import styled from "styled-components";
+import { secondaryColor } from "theme/theme";
 
 const Wrapper = styled.div`
-  width: ${props => props.width ? props.width : '25vw'} 
-  height: ${props => props.height ? props.height : '25vw'}
-  color: ${secondaryColor}
-`
+  width: ${(props: IProps) => (props.width ? props.width : "25vw")};
+  height: ${(props: IProps) => (props.height ? props.height : "25vw")};
+  color: ${secondaryColor};
+`;
 
-const Notebook = props => 
-<Wrapper {...props}>
-<svg version="1.1" id="Capa_1" x="0px" y="0px"
-	 viewBox="0 0 336 336">
-	<g>
-		<path d="M301.76,5.72C298.113,2.065,293.164,0.008,288,0h-92H76C65.237-0.022,56.47,8.638,56.36,19.4V45H51
+interface IProps {
+  width?: string;
+  height?: string;
+}
+
+const Notebook = (props: IProps) => (
+  <Wrapper {...props}>
+    <svg version="1.1" id="Capa_1" x="0px" y="0px" viewBox="0 0 336 336">
+      <g>
+        <path
+          d="M301.76,5.72C298.113,2.065,293.164,0.008,288,0h-92H76C65.237-0.022,56.47,8.638,56.36,19.4V45H51
 			c-6.096,0.008-11.939,2.44-16.24,6.76C30.44,56.061,28.008,61.904,28,68c0.039,6.153,2.547,12.032,6.96,16.32
 			c4.301,4.32,10.144,6.752,16.24,6.76h5.16V145H51c-6.096,0.008-11.939,2.44-16.24,6.76c-4.32,4.301-6.752,10.144-6.76,16.24
 			c0.05,6.139,2.557,12.002,6.96,16.28c4.301,4.32,10.144,6.752,16.24,6.76h5.16V245H51c-6.096,0.008-11.939,2.44-16.24,6.76
@@ -37,10 +42,11 @@ const Notebook = props =>
 			c-0.022,1.847-1.513,3.338-3.36,3.36h-161.6V16H188v81.68c-0.045,3.599,1.125,7.108,3.32,9.96c1.686,2.12,3.994,3.659,6.6,4.4
 			c2.508,0.713,5.173,0.643,7.64-0.2l0.6-0.2c3.819-1.603,7.008-4.413,9.08-8l12.44-20l12.44,20c2.072,3.587,5.261,6.397,9.08,8
 			c5.275,2.081,11.291,0.455,14.8-4c2.238-2.836,3.451-6.347,3.44-9.96V16.04h20.92c0.882-0.002,1.73,0.343,2.36,0.96
-			c0.617,0.63,0.962,1.478,0.96,2.36V316.64z"/>
-	</g>
-</svg> 
-</Wrapper>
+			c0.617,0.63,0.962,1.478,0.96,2.36V316.64z"
+        />
+      </g>
+    </svg>
+  </Wrapper>
+);
 
-
-export default Notebook
+export default Notebook;

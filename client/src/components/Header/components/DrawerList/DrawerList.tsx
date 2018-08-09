@@ -8,14 +8,14 @@ import Divider from '@material-ui/core/Divider';
 import FaceIcon from '@material-ui/icons/Face'
 import LogoutIcon from '@material-ui/icons/ExitToApp'
 
-type Props = {
+interface IProps {
   onLogoutClick: () => void,
   onProfileClick: () => void
 }
 
-const DrawerList = (props: Props) =>
+const DrawerList = (props: IProps) =>
   <List component="nav">
-    <ListItem button onClick={props.onProfileClick}>
+    <ListItem button={true} onClick={props.onProfileClick}>
       <ListItemIcon>
         <FaceIcon />
       </ListItemIcon>
@@ -24,7 +24,7 @@ const DrawerList = (props: Props) =>
       </ListItemText>
     </ListItem>
     <Divider />
-    <ListItem button onClick={props.onLogoutClick}>
+    <ListItem button={true} onClick={props.onLogoutClick}>
       <ListItemIcon>
         <LogoutIcon />
       </ListItemIcon>

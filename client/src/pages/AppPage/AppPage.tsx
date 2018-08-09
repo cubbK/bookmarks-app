@@ -3,7 +3,7 @@ import HeaderContainer from "containers/HeaderContainer/HeaderContainer";
 import LinkListContainer from "./containers/LinkListContainer/LinkListContainer";
 
 class AppPage extends React.Component {
-  render() {
+  public render() {
     return (
       <div>
         <HeaderContainer />

@@ -6,7 +6,7 @@ const Introduction = () =>
     <Typography variant="display3">
         Booky
     </Typography>
-    <Typography variant="headline" gutterBottom>
+    <Typography variant="headline" gutterBottom={true}>
         A place to store your bookmarks📚📚📚
     </Typography>
   </header>
