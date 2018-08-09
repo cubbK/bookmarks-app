@@ -6,6 +6,6 @@ export interface ISetGoogleTokenReturn {
 export function setGoogleToken(token: string | null): ISetGoogleTokenReturn {
   return {
     type: "SET_GOOGLE_TOKEN",
-    payload: token
+    payload: token,
   };
 }
