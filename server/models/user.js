@@ -26,10 +26,10 @@ exports.getAll = async () => {
 };
 
 exports.setUserField = (googleId, field, value) => {
-  const fieldsToUpdate = { [field]: value }
-  return User.update({ googleId }, fieldsToUpdate, function (err, raw) {
-    if (err) return err
-  }).exec()
+  const fieldsToUpdate = { [field]: value };
+  return User.update({ googleId }, fieldsToUpdate, function(err, raw) {
+    if (err) return err;
+  }).exec();
 };
 
 // Every google account has a unique id which is sub field in decoded token
@@ -51,4 +51,10 @@ exports.findOrCreateByGoogleId = googleId => {
       }
     );
   });
+};
+
+exports.getUserByAccessToken = async (accessToken, userId) => {
+  const user = await User.findOne({ _id: userId }).exec();
+  const refreshToken = user.refreshToken;
+  console.log(refreshToken);
 };

@@ -20,11 +20,12 @@ export function setUserId(userId: string | null) {
   };
 }
 
-export function getUserDataFromServer(token: string) {
+export function getUserDataFromServer(token: string, userId: string) {
   return {
     type: "GET_USER_DATA_FROM_SERVER",
     payload: axios.post(`${API_URL}google/getUserByToken`, {
-      token: token
+      token,
+      userId
     })
   };
 }

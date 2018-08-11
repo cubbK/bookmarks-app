@@ -43,8 +43,10 @@ router.post("/getUserByCodeAndSetRefreshToken", async (ctx, next) => {
 
 router.post("/getUserByToken", async (ctx, next) => {
   const accessToken = ctx.request.body.token;
+  const userId = ctx.request.body.userId;
 
-  isGoogleAccessTokenValid(accessToken);
+  User.getUserByAccessToken(accessToken, userId);
+  //const isTokenValid = await isGoogleAccessTokenValid(accessToken);
 
   ctx.response.body = "get user by token";
 

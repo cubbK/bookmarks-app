@@ -1,3 +1,4 @@
 export interface IStoreState {
-  googleToken: string | null
+  googleToken: string | null;
+  userId: string | null;
 }

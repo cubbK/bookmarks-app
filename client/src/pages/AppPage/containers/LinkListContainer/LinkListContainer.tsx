@@ -6,13 +6,14 @@ import { getUserDataFromServer } from "actions/tokenActions";
 
 interface IProps {
   googleToken: string;
-  getUserDataFromServer: (token: string) => void;
+  userId: string;
+  getUserDataFromServer: (token: string, userId: string) => void;
 }
 
 class LinkListContainer extends React.Component<IProps> {
   componentDidMount() {
     console.log(this.props.googleToken);
-    this.props.getUserDataFromServer(this.props.googleToken);
+    this.props.getUserDataFromServer(this.props.googleToken, this.props.userId);
   }
 
   render() {
@@ -22,7 +23,8 @@ class LinkListContainer extends React.Component<IProps> {
 
 function mapStateToProps(state: IStoreState) {
   return {
-    googleToken: state.googleToken
+    googleToken: state.googleToken,
+    userId: state.userId
   };
 }
 
