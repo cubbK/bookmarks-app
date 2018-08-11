@@ -4,7 +4,6 @@
   // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
   "version": "0.2.0",
   "configurations": [
-  
     {
       "type": "chrome",
       "request": "launch",
@@ -17,7 +16,7 @@
       "type": "node",
       "request": "launch",
       "program": "${workspaceRoot}/server/app.js",
-      "stopOnEntry": true,
+      "stopOnEntry": false,
       "args": [],
       "cwd": "${workspaceRoot}/server",
       "preLaunchTask": null,

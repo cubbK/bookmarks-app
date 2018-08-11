@@ -45,10 +45,12 @@ router.post("/getUserByToken", async (ctx, next) => {
   const accessToken = ctx.request.body.token;
   const userId = ctx.request.body.userId;
 
-  User.getUserByAccessToken(accessToken, userId);
-  //const isTokenValid = await isGoogleAccessTokenValid(accessToken);
-
-  ctx.response.body = "get user by token";
+  try {
+    const retrievedUser = await User.getUserByAccessToken(accessToken, userId);
+    ctx.response.body = JSON.stringify(retrievedUser);
+  } catch (err) {
+    ctx.throw(400, "Cannot get user");
+  }
 
   return next();
 });

@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const findOrCreate = require("mongoose-find-or-create");
+const { oauth2Client } = require("../googleClient");
 
 const userSchema = new mongoose.Schema({
   googleId: String,
@@ -55,6 +56,36 @@ exports.findOrCreateByGoogleId = googleId => {
 
 exports.getUserByAccessToken = async (accessToken, userId) => {
   const user = await User.findOne({ _id: userId }).exec();
-  const refreshToken = user.refreshToken;
-  console.log(refreshToken);
+  const refreshToken = user.googleRefreshToken;
+
+  // Required shape for google auth client
+  const tokens = {
+    access_token: accessToken,
+    refresh_token: refreshToken
+  };
+  console.log("old accessToken", accessToken);
+  oauth2Client.setCredentials(tokens);
+  oauth2Client.refreshAccessToken();
+
+  const newToken = oauth2Client.credentials.access_token;
+  try {
+    const tokenInfo = await oauth2Client.getTokenInfo(newToken);
+    const googleId = tokenInfo.sub;
+
+    const userByGoogleId = await User.findOne({ googleId }).exec();
+
+    // return {
+    //   links: userByGoogleId.links
+    // };
+    return {
+      links: ["testLink1", "testLink2"]
+    };
+  } catch (err) {
+    console.log(err.message);
+    return err;
+  }
+
+  console.log(123);
+
+  // const tokenInfo = await oAuth2client.getTokenInfo('my-access-token');
 };
