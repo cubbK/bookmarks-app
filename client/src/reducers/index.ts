@@ -1,14 +1,15 @@
-import { combineReducers, Reducer } from 'redux'
-import googleTokenReducer from './googleTokenReducer'
+import { combineReducers, Reducer } from "redux";
+import googleTokenReducer from "./googleTokenReducer";
+import userIdReducer from "./userIdReducer";
 
 interface IStoreState {
-  googleToken: string | null
+  googleToken: string | null;
+  userId: string | null;
 }
 
 const combinedReducers: Reducer<IStoreState> = combineReducers<IStoreState>({
-  googleToken: googleTokenReducer
-})
+  googleToken: googleTokenReducer,
+  userId: userIdReducer
+});
 
-console.log(combinedReducers)
-
-export default combinedReducers
+export default combinedReducers;

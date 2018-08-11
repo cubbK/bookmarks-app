@@ -1,13 +1,14 @@
-import * as React from 'react';
+import * as React from "react";
 import queryString from "query-string";
 import { API_URL } from "globals.js";
 import axios from "axios";
-import { setGoogleToken, ISetGoogleTokenReturn } from "actions/tokenActions";
+import { setGoogleToken, setUserId } from "actions/tokenActions";
 import { connect } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 
 interface IProps {
-  setGoogleToken: (token: string) => ISetGoogleTokenReturn
+  setGoogleToken: (token: string) => void;
+  setUserId: (token: string) => void;
 }
 
 class GoogleRedirectPage extends React.Component<IProps> {
@@ -16,21 +17,24 @@ class GoogleRedirectPage extends React.Component<IProps> {
   };
 
   public render() {
-    return this.state.toRedirect ? <Redirect to="/" />: 'Loading';
+    return this.state.toRedirect ? <Redirect to="/" /> : "Loading";
   }
 
   public async componentDidMount() {
     const params = queryString.parse(window.location.search);
-    const requestUrl = `${API_URL}googleUser/`;
     try {
-      const request = await axios.get(requestUrl, {
-        headers: {
+      const request = await axios.post(
+        `${API_URL}google/getUserByCodeAndSetRefreshToken`,
+        {
           code: params.code
         }
-      });
+      );
       const user = request.data;
 
+      console.log(user);
       this.props.setGoogleToken(user.googleAccessToken);
+      this.props.setUserId(user.userId);
+
       this.setState({ toRedirect: true });
     } catch (err) {
       console.log(err);
@@ -40,5 +44,5 @@ class GoogleRedirectPage extends React.Component<IProps> {
 
 export default connect(
   null,
-  { setGoogleToken }
+  { setGoogleToken, setUserId }
 )(GoogleRedirectPage);

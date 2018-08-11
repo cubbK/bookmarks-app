@@ -31,9 +31,9 @@ const App = (props: IProps) => (
   </React.Fragment>
 );
 
-export default compose(
+export default compose<any>(
   withRouter,
   connect((state: IStoreState) => ({
-    googleToken: state.googleToken,
+    googleToken: state.googleToken
   }))
 )(App);

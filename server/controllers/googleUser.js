@@ -3,38 +3,50 @@ const User = require("../models/user");
 const jwtDecode = require("jwt-decode");
 
 const router = new Router({
-  prefix: "/googleUser"
+  prefix: "/google"
 });
 
-const getGoogleDataFromAuthorizationCode = require("../helpers/getGoogleDataFromAuthorizationCode.js");
-router.use(getGoogleDataFromAuthorizationCode);
+const getGoogleTokenDataFromCode = require("../helpers/getGoogleTokenDataFromCode.js");
+const isGoogleAccessTokenValid = require("../helpers/isGoogleAccessTokenValid");
 
-router.get("/", async (ctx, next) => {
+router.post("/getUserByCodeAndSetRefreshToken", async (ctx, next) => {
   try {
-    const refreshToken = ctx.googleTokens.refresh_token;
-    const accessToken = ctx.googleTokens.access_token;
+    const tokens = await getGoogleTokenDataFromCode(ctx.request.body.code);
 
-    const userInfo = jwtDecode(ctx.googleTokens.id_token);
+    const refreshToken = tokens.refresh_token;
+    const accessToken = tokens.access_token;
+
+    const userInfo = jwtDecode(tokens.id_token);
     const userId = userInfo.sub;
     const userName = userInfo.given_name;
 
-    
     const retrievedUser = await User.findOrCreateByGoogleId(userId);
     await User.setUserField(userId, "googleRefreshToken", refreshToken);
-    
 
+    console.log(retrievedUser);
 
     const responseObject = {
+      userId: retrievedUser._id,
       googleId: retrievedUser.googleId,
       googleAccessToken: accessToken,
       links: retrievedUser.links
-    }
+    };
 
     ctx.response.body = JSON.stringify(responseObject);
   } catch (err) {
     console.log(err);
-    ctx.throw(400, "Cannot get user")
+    ctx.throw(400, "Cannot get user");
   }
+
+  return next();
+});
+
+router.post("/getUserByToken", async (ctx, next) => {
+  const accessToken = ctx.request.body.token;
+
+  isGoogleAccessTokenValid(accessToken);
+
+  ctx.response.body = "get user by token";
 
   return next();
 });
