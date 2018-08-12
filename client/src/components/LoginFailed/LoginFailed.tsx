@@ -12,7 +12,11 @@ const InlineCard = styled(Card)`
   display: inline-block;
 `;
 
-const LoginFailed = () => (
+export interface IProps {
+  onLogoutClick?: () => any;
+}
+
+const LoginFailed = (props: IProps) => (
   <InlineCard>
     <CardContent>
       <Typography gutterBottom={true} variant="headline" component="h2">
@@ -23,7 +27,7 @@ const LoginFailed = () => (
       </Typography>
     </CardContent>
     <CardActions>
-      <Button size="small" color="secondary">
+      <Button size="small" color="secondary" onClick={props.onLogoutClick}>
         Logout & Try Again
       </Button>
     </CardActions>
