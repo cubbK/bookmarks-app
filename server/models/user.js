@@ -63,9 +63,8 @@ exports.getUserByAccessToken = async (accessToken, userId) => {
     access_token: accessToken,
     refresh_token: refreshToken
   };
-  console.log("old accessToken", accessToken);
   oauth2Client.setCredentials(tokens);
-  oauth2Client.refreshAccessToken();
+  await oauth2Client.refreshAccessToken();
 
   const newToken = oauth2Client.credentials.access_token;
   try {
