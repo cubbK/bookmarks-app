@@ -5,7 +5,7 @@ import { compose } from "redux";
 import Homepage from "./pages/Homepage/Homepage";
 import AppPage from "./pages/AppPage/AppPage";
 import GoogleRedirectPage from "./pages/GoogleRedirectPage/GoogleRedirectPage";
-import { IStoreState } from "types";
+import { IStoreState } from "reducers";
 
 interface IProps {
   googleToken: string;

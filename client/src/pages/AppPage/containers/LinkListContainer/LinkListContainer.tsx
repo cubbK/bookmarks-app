@@ -1,5 +1,5 @@
 import * as React from "react";
-import { IStoreState } from "types";
+import { IStoreState } from "reducers";
 
 import { connect } from "react-redux";
 import { getUserDataFromServer } from "actions/tokenActions";
@@ -24,7 +24,8 @@ class LinkListContainer extends React.Component<IProps> {
 function mapStateToProps(state: IStoreState) {
   return {
     googleToken: state.googleToken,
-    userId: state.userId
+    userId: state.userId,
+    userData: state.userData
   };
 }
 

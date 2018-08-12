@@ -5,7 +5,7 @@ import userDataReducer, {
   IState as userDataInterface
 } from "./userDataReducer";
 
-interface IStoreState {
+export interface IStoreState {
   googleToken: string | null;
   userId: string | null;
   userData: userDataInterface;

@@ -1,55 +1,49 @@
-import * as React from 'react'
-import AppBar from '@material-ui/core/AppBar'
-import Toolbar from '@material-ui/core/Toolbar'
-import Button from '@material-ui/core/IconButton'
-import SwipeableDrawer from '@material-ui/core/SwipeableDrawer'
-import MenuIcon from '@material-ui/icons/Menu'
+import * as React from "react";
+import AppBar from "@material-ui/core/AppBar";
+import Toolbar from "@material-ui/core/Toolbar";
+import Button from "@material-ui/core/IconButton";
+import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
+import MenuIcon from "@material-ui/icons/Menu";
 
-import DrawerList from './components/DrawerList/DrawerList'
+import DrawerList from "./components/DrawerList/DrawerList";
 
-import styled from 'styled-components'
-import { whiteColor } from 'theme/theme'
+import styled from "styled-components";
+import { whiteColor } from "theme/theme";
 
-const AppBarStyled = styled(AppBar)`
-`
+const AppBarStyled = styled(AppBar)``;
 
 const ToolbarStyled = styled(Toolbar)`
   display: flex;
   justify-content: space-between;
-`
+`;
 
 const WhiteButton = styled(Button)`
   && {
     color: ${whiteColor};
   }
-`
+`;
 
 interface IProps {
-  onLogoutClick: () => void,
-  onProfileClick: () => void
+  onLogoutClick: () => void;
+  onProfileClick: () => void;
 }
 
 interface IState {
-  drawerOpen: boolean
+  drawerOpen: boolean;
 }
 
 class Header extends React.Component<IProps, IState> {
   public state = {
     drawerOpen: false
-  }
+  };
 
   public render() {
     return (
       <header>
-        <AppBarStyled position='sticky'>
+        <AppBarStyled position="sticky">
           <ToolbarStyled>
-            <div>
-              Logo
-            </div>
-            <WhiteButton
-              aria-haspopup="true"
-              onClick={this.toggleDrawer(true)}
-            >
+            <div>Logo</div>
+            <WhiteButton aria-haspopup="true" onClick={this.toggleDrawer(true)}>
               <MenuIcon />
             </WhiteButton>
             <SwipeableDrawer
@@ -58,7 +52,7 @@ class Header extends React.Component<IProps, IState> {
               onClose={this.toggleDrawer(false)}
               onOpen={this.toggleDrawer(true)}
             >
-              <DrawerList 
+              <DrawerList
                 onLogoutClick={this.props.onLogoutClick}
                 onProfileClick={this.props.onProfileClick}
               />
@@ -66,15 +60,14 @@ class Header extends React.Component<IProps, IState> {
           </ToolbarStyled>
         </AppBarStyled>
       </header>
-    )
+    );
   }
 
-  private toggleDrawer = (isOpen : boolean) => () => {
+  private toggleDrawer = (isOpen: boolean) => () => {
     this.setState({
       drawerOpen: isOpen
-    })
-  }
+    });
+  };
 }
 
-
-export default Header
+export default Header;
