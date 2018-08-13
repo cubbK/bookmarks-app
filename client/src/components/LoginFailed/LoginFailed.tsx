@@ -21,10 +21,10 @@ const LoginFailed = (props: IProps) => (
   <InlineCard>
     <CardContent>
       <Typography gutterBottom={true} variant="headline" component="h2">
-        Error
+        Error: {props.message}
       </Typography>
       <Typography component="p">
-        Login failed. Something went wrong :( <div>{props.message}</div>
+        Login failed. Something went wrong :(
       </Typography>
     </CardContent>
     <CardActions>

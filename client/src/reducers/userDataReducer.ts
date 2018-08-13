@@ -22,7 +22,7 @@ export default (state = defaultState, action) =>
         break;
       case "GET_USER_FROM_JWT_STRING_FULFILLED":
         draft.loading = false;
-        draft.links = action.payload;
+        draft.links = action.payload.data.links;
         break;
       case "GET_USER_FROM_JWT_STRING_REJECTED":
         draft.loading = false;

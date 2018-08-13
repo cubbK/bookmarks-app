@@ -47,9 +47,7 @@ router.post("/getUserFromJWTString", async (ctx, next) => {
 
     const user = jwt.verify(userJWT, process.env.JWT_TOKEN_SECRET);
 
-    const user1 = 1;
-
-    const retrievedUser = await User.getUserByAccessToken(userId);
+    const retrievedUser = await User.getUserByAccessToken(user.userId);
     ctx.response.body = JSON.stringify(retrievedUser);
   } catch (err) {
     if (err.message === "jwt malformed") ctx.throw(400, "jwt malformed");
