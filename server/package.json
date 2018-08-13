@@ -21,6 +21,7 @@
     "dotenv": "^6.0.0",
     "google-auth-library": "^1.6.1",
     "googleapis": "^32.0.0",
+    "jsonwebtoken": "^8.3.0",
     "jwt-decode": "^2.2.0",
     "jwt-decoder": "0.0.0",
     "koa": "^2.5.2",

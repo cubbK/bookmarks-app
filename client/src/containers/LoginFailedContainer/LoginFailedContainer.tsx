@@ -1,15 +1,15 @@
 import * as React from "react";
 import LoginFailed from "components/LoginFailed/LoginFailed";
-import { setGoogleToken } from "actions/tokenActions";
+import { setUserJWT } from "actions/authActions";
 import { connect } from "react-redux";
 
 interface IProps {
-  setGoogleToken: (token: null) => void;
+  setUserJWT: (token: null) => void;
 }
 
 class LoginFailedContainer extends React.Component<IProps> {
   private logOut = () => {
-    this.props.setGoogleToken(null);
+    this.props.setUserJWT(null);
   };
 
   render() {
@@ -19,5 +19,5 @@ class LoginFailedContainer extends React.Component<IProps> {
 
 export default connect(
   null,
-  { setGoogleToken }
+  { setUserJWT }
 )(LoginFailedContainer);

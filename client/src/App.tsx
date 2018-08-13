@@ -2,13 +2,13 @@ import * as React from "react";
 import { Route, withRouter, Switch } from "react-router";
 import { connect } from "react-redux";
 import { compose } from "redux";
-import Homepage from "./pages/Homepage/Homepage";
-import AppPage from "./pages/AppPage/AppPage";
-import GoogleRedirectPage from "./pages/GoogleRedirectPage/GoogleRedirectPage";
+import Homepage from "pages/Homepage/Homepage";
+import AppPage from "pages/AppPage/AppPage";
+import GoogleRedirectPage from "pages/GoogleRedirectPage/GoogleRedirectPage";
 import { IStoreState } from "reducers";
 
 interface IProps {
-  googleToken: string;
+  userJWT: string | null;
 }
 
 const NoMatch = () => <div>No match</div>;
@@ -19,7 +19,7 @@ const App = (props: IProps) => (
       <Route
         exact={true}
         path="/"
-        component={props.googleToken ? AppPage : Homepage}
+        component={props.userJWT ? AppPage : Homepage}
       />
       <Route
         exact={true}
@@ -34,6 +34,6 @@ const App = (props: IProps) => (
 export default compose<any>(
   withRouter,
   connect((state: IStoreState) => ({
-    googleToken: state.googleToken
+    userJWT: state.userJWT
   }))
 )(App);

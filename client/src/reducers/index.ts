@@ -1,19 +1,17 @@
 import { combineReducers, Reducer } from "redux";
-import googleTokenReducer from "./googleTokenReducer";
-import userIdReducer from "./userIdReducer";
+import UserJWTReducer from "./userJWTReducer";
+
 import userDataReducer, {
   IState as userDataInterface
 } from "./userDataReducer";
 
 export interface IStoreState {
-  googleToken: string | null;
-  userId: string | null;
+  userJWT: string | null;
   userData: userDataInterface;
 }
 
 const combinedReducers: Reducer<IStoreState> = combineReducers<IStoreState>({
-  googleToken: googleTokenReducer,
-  userId: userIdReducer,
+  userJWT: UserJWTReducer,
   userData: userDataReducer
 });
 

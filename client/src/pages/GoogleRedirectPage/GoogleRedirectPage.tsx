@@ -2,13 +2,12 @@ import * as React from "react";
 import queryString from "query-string";
 import { API_URL } from "globals.js";
 import axios from "axios";
-import { setGoogleToken, setUserId } from "actions/tokenActions";
+import { setUserJWT } from "actions/authActions";
 import { connect } from "react-redux";
 import { Redirect, Link } from "react-router-dom";
 
 interface IProps {
-  setGoogleToken: (token: string) => void;
-  setUserId: (token: string) => void;
+  setUserJWT: (JWTString: string) => void;
 }
 
 class GoogleRedirectPage extends React.Component<IProps> {
@@ -29,11 +28,9 @@ class GoogleRedirectPage extends React.Component<IProps> {
           code: params.code
         }
       );
-      const user = request.data;
+      const JWTSTring = request.data;
 
-      console.log(user);
-      this.props.setGoogleToken(user.googleAccessToken);
-      this.props.setUserId(user.userId);
+      this.props.setUserJWT(JWTSTring);
 
       this.setState({ toRedirect: true });
     } catch (err) {
@@ -44,5 +41,5 @@ class GoogleRedirectPage extends React.Component<IProps> {
 
 export default connect(
   null,
-  { setGoogleToken, setUserId }
+  { setUserJWT }
 )(GoogleRedirectPage);

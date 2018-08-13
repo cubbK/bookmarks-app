@@ -1,4 +1,4 @@
-import * as React from 'react';
+import * as React from "react";
 import LoginBtn from "components/LoginBtn/LoginBtn";
 
 import { GOOGLE_CLIENT_ID, GOOGLE_REDIRECT_URI } from "globals.js";
@@ -15,16 +15,14 @@ const googleUrlWithSpaces = `
 
 const googleUrl = googleUrlWithSpaces.replace(/\s/g, "");
 
+console.log(googleUrl);
+
 class LoginBtnGoogle extends React.Component {
-  
   public render() {
-    return (
-      <LoginBtn name='Google' onClick={this.setHref} />
-    );
+    return <LoginBtn name="Google" onClick={this.setHref} />;
   }
 
-  private setHref = () => document.location.href = googleUrl
-  
+  private setHref = () => (document.location.href = googleUrl);
 }
 
 export default LoginBtnGoogle;

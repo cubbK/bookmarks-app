@@ -2,7 +2,7 @@ import * as React from "react";
 import { IStoreState } from "reducers";
 
 import { connect } from "react-redux";
-import { getUserDataFromServer } from "actions/tokenActions";
+import { getUserDataFromServer } from "actions/authActions";
 import userDataReducer, {
   IState as UserDataInterface
 } from "reducers/userDataReducer";
@@ -11,16 +11,14 @@ import LinearProgress from "@material-ui/core/LinearProgress";
 import LoginFailedContainer from "containers/LoginFailedContainer/LoginFailedContainer";
 
 interface IProps {
-  googleToken: string;
-  userId: string;
+  userJWT: string;
   userData: UserDataInterface;
-  getUserDataFromServer: (token: string, userId: string) => void;
+  getUserDataFromServer: (userJWT: string) => void;
 }
 
 class LinkListContainer extends React.Component<IProps> {
   componentDidMount() {
-    console.log(this.props.googleToken);
-    this.props.getUserDataFromServer(this.props.googleToken, this.props.userId);
+    this.props.getUserDataFromServer(this.props.userJWT);
   }
 
   mapLinks = () => {
@@ -47,8 +45,7 @@ class LinkListContainer extends React.Component<IProps> {
 
 function mapStateToProps(state: IStoreState) {
   return {
-    googleToken: state.googleToken,
-    userId: state.userId,
+    userJWT: state.userJWT,
     userData: state.userData
   };
 }

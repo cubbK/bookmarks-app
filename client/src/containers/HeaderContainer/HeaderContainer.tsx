@@ -1,10 +1,10 @@
 import * as React from "react";
 import Header from "components/Header/Header";
 import { connect } from "react-redux";
-import { setGoogleToken } from "actions/tokenActions";
+import { setUserJWT } from "actions/authActions";
 
 interface IProps {
-  setGoogleToken: (token: string | null) => void;
+  setUserJWT: (token: string | null) => void;
 }
 
 class HeaderContainer extends React.Component<IProps> {
@@ -19,7 +19,7 @@ class HeaderContainer extends React.Component<IProps> {
 
   private onLogoutClick = () => {
     console.log("logout");
-    this.props.setGoogleToken(null);
+    this.props.setUserJWT(null);
   };
 
   private onProfileClick = () => {
@@ -30,5 +30,5 @@ class HeaderContainer extends React.Component<IProps> {
 
 export default connect(
   null,
-  { setGoogleToken }
+  { setUserJWT }
 )(HeaderContainer);

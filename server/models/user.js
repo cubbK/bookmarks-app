@@ -54,13 +54,12 @@ exports.findOrCreateByGoogleId = googleId => {
   });
 };
 
-exports.getUserByAccessToken = async (accessToken, userId) => {
+exports.getUserByAccessToken = async userId => {
   const user = await User.findOne({ _id: userId }).exec();
   const refreshToken = user.googleRefreshToken;
 
   // Required shape for google auth client
   const tokens = {
-    access_token: accessToken,
     refresh_token: refreshToken
   };
   oauth2Client.setCredentials(tokens);

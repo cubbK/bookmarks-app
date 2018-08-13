@@ -1,6 +1,7 @@
 const Router = require("koa-router");
 const User = require("../models/user");
 const jwtDecode = require("jwt-decode");
+var jwt = require("jsonwebtoken");
 
 const router = new Router({
   prefix: "/google"
@@ -26,13 +27,12 @@ router.post("/getUserByCodeAndSetRefreshToken", async (ctx, next) => {
     console.log(retrievedUser);
 
     const responseObject = {
-      userId: retrievedUser._id,
-      googleId: retrievedUser.googleId,
-      googleAccessToken: accessToken,
-      links: retrievedUser.links
+      userId: retrievedUser._id
     };
 
-    ctx.response.body = JSON.stringify(responseObject);
+    const jwtResponse = jwt.sign(responseObject, process.env.JWT_TOKEN_SECRET);
+
+    ctx.response.body = JSON.stringify(jwtResponse);
   } catch (err) {
     console.log(err);
     ctx.throw(400, "Cannot get user");
@@ -42,11 +42,10 @@ router.post("/getUserByCodeAndSetRefreshToken", async (ctx, next) => {
 });
 
 router.post("/getUserByToken", async (ctx, next) => {
-  const accessToken = ctx.request.body.token;
   const userId = ctx.request.body.userId;
 
   try {
-    const retrievedUser = await User.getUserByAccessToken(accessToken, userId);
+    const retrievedUser = await User.getUserByAccessToken(userId);
     ctx.response.body = JSON.stringify(retrievedUser);
   } catch (err) {
     ctx.throw(400, "Cannot get user");

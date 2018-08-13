@@ -1,14 +1,14 @@
-import * as React from 'react';
+import * as React from "react";
 import * as ReactDOM from "react-dom";
-import App from "./App";
-import registerServiceWorker from "./registerServiceWorker";
+import App from "App";
+import registerServiceWorker from "registerServiceWorker";
 
 import { Provider } from "react-redux";
 import { PersistGate } from "redux-persist/integration/react";
-import { store, persistor } from "./store";
+import { store, persistor } from "store";
 import { BrowserRouter as Router } from "react-router-dom";
 import CssBaseline from "@material-ui/core/CssBaseline";
-import { muiTheme, styledTheme } from "./theme/theme";
+import { muiTheme, styledTheme } from "theme/theme";
 import { MuiThemeProvider } from "@material-ui/core/styles";
 import { ThemeProvider } from "styled-components";
 
