@@ -1,5 +1,5 @@
 import axios from "axios";
-import { API_URL } from "globals";
+import { API_URL } from "globals.js";
 
 export function setUserJWT(JWTString: string | null) {
   return {
@@ -8,11 +8,11 @@ export function setUserJWT(JWTString: string | null) {
   };
 }
 
-export function getUserDataFromServer(userJWT) {
+export function getUserFromJWTString(JWTString) {
   return {
-    type: "GET_USER_DATA_FROM_SERVER",
-    payload: axios.post(`${API_URL}google/getUserByToken`, {
-      userJWT
+    type: "GET_USER_FROM_JWT_STRING",
+    payload: axios.post(`${API_URL}google/getUserFromJWTString`, {
+      JWTString
     })
   };
 }

@@ -2,7 +2,7 @@ import * as React from "react";
 import { IStoreState } from "reducers";
 
 import { connect } from "react-redux";
-import { getUserDataFromServer } from "actions/authActions";
+import { getUserFromJWTString } from "actions/authActions";
 import userDataReducer, {
   IState as UserDataInterface
 } from "reducers/userDataReducer";
@@ -13,12 +13,12 @@ import LoginFailedContainer from "containers/LoginFailedContainer/LoginFailedCon
 interface IProps {
   userJWT: string;
   userData: UserDataInterface;
-  getUserDataFromServer: (userJWT: string) => void;
+  getUserFromJWTString: (JWTString: string) => void;
 }
 
 class LinkListContainer extends React.Component<IProps> {
   componentDidMount() {
-    this.props.getUserDataFromServer(this.props.userJWT);
+    this.props.getUserFromJWTString(this.props.userJWT);
   }
 
   mapLinks = () => {
@@ -31,7 +31,9 @@ class LinkListContainer extends React.Component<IProps> {
     if (this.props.userData.loading) {
       return <LinearProgress color="secondary" />;
     } else if (this.props.userData.hasErrored) {
-      return <LoginFailedContainer />;
+      return (
+        <LoginFailedContainer message={this.props.userData.errorMessage} />
+      );
     } else {
       return (
         <div>
@@ -52,5 +54,5 @@ function mapStateToProps(state: IStoreState) {
 
 export default connect(
   mapStateToProps,
-  { getUserDataFromServer }
+  { getUserFromJWTString }
 )(LinkListContainer);

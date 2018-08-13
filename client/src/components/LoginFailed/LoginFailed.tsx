@@ -14,6 +14,7 @@ const InlineCard = styled(Card)`
 
 export interface IProps {
   onLogoutClick?: () => any;
+  message?: string;
 }
 
 const LoginFailed = (props: IProps) => (
@@ -23,7 +24,7 @@ const LoginFailed = (props: IProps) => (
         Error
       </Typography>
       <Typography component="p">
-        Login failed. Something went wrong :(
+        Login failed. Something went wrong :( <div>{props.message}</div>
       </Typography>
     </CardContent>
     <CardActions>

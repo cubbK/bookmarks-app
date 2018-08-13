@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 
 interface IProps {
   setUserJWT: (token: null) => void;
+  message?: string;
 }
 
 class LoginFailedContainer extends React.Component<IProps> {
@@ -13,7 +14,9 @@ class LoginFailedContainer extends React.Component<IProps> {
   };
 
   render() {
-    return <LoginFailed onLogoutClick={this.logOut} />;
+    return (
+      <LoginFailed onLogoutClick={this.logOut} message={this.props.message} />
+    );
   }
 }
 

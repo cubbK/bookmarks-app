@@ -41,13 +41,18 @@ router.post("/getUserByCodeAndSetRefreshToken", async (ctx, next) => {
   return next();
 });
 
-router.post("/getUserByToken", async (ctx, next) => {
-  const userId = ctx.request.body.userId;
-
+router.post("/getUserFromJWTString", async (ctx, next) => {
   try {
+    const userJWT = ctx.request.body.JWTString;
+
+    const user = jwt.verify(userJWT, process.env.JWT_TOKEN_SECRET);
+
+    const user1 = 1;
+
     const retrievedUser = await User.getUserByAccessToken(userId);
     ctx.response.body = JSON.stringify(retrievedUser);
   } catch (err) {
+    if (err.message === "jwt malformed") ctx.throw(400, "jwt malformed");
     ctx.throw(400, "Cannot get user");
   }
 
