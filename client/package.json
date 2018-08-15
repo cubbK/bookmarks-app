@@ -36,7 +36,7 @@
     "eject": "react-scripts-ts eject",
     "storybook": "start-storybook -p 9009 -s public",
     "build-storybook": "build-storybook -s public",
-    "docz": "docz dev"
+    "docz:dev": "docz dev"
   },
   "devDependencies": {
     "@types/jest": "^23.3.1",
