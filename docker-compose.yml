@@ -1,6 +1,6 @@
 version: "3"
 services:
-  web:
+  client:
     build: client/
     ports:
       - "3000:3000"
@@ -9,6 +9,7 @@ services:
       - CHOKIDAR_USEPOLLING=true
     volumes:
       - ./client:/app
-      - api-deps:/app/node_modules
+      - client-deps:/app/node_modules
 volumes:
-  ? api-deps
+  ? client-deps
+  ? server-deps
