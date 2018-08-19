@@ -17,6 +17,8 @@ services:
       - CHOKIDAR_USEPOLLING=true
     volumes:
       - ./server:/app
+    expose:
+      - 1137
     links:
       - mongo
   mongo:

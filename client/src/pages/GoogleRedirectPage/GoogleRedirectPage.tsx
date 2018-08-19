@@ -21,13 +21,12 @@ class GoogleRedirectPage extends React.Component<IProps> {
 
   public async componentDidMount() {
     const params = queryString.parse(window.location.search);
+    const requestUrl = `http://${API_URL}google/getUserByCodeAndSetRefreshToken`;
+    console.log(requestUrl);
     try {
-      const request = await axios.post(
-        `${API_URL}google/getUserByCodeAndSetRefreshToken`,
-        {
-          code: params.code
-        }
-      );
+      const request = await axios.post(requestUrl, {
+        code: params.code
+      });
       const JWTSTring = request.data;
 
       this.props.setUserJWT(JWTSTring);
