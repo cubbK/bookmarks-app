@@ -9,7 +9,20 @@ services:
       - CHOKIDAR_USEPOLLING=true
     volumes:
       - ./client:/app
-      - client-deps:/app/node_modules
-volumes:
-  ? client-deps
-  ? server-deps
+    links:
+      - server
+  server:
+    build: server/
+    environment:
+      - CHOKIDAR_USEPOLLING=true
+    volumes:
+      - ./server:/app
+    links:
+      - mongo
+  mongo:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    expose:
+      - 27017
