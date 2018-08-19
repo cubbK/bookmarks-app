@@ -1,15 +1,17 @@
 FROM node:10
 
-ADD yarn.lock /yarn.lock
-ADD package.json /package.json
+ENV HOME=/app
+ENV NPM_CONFIG_LOGLEVEL warn
 
-ENV NODE_PATH=/node_modules
-ENV PATH=$PATH:/node_modules/.bin
+COPY package.json $HOME/
+COPY yarn.lock $HOME/
+
+WORKDIR $HOME
+
 RUN yarn
 
-ADD . /app
+COPY . $HOME/
 
 EXPOSE 3000
-EXPOSE 35729
 
-ENTRYPOINT cd app && yarn start
+CMD ["yarn", "start"]
