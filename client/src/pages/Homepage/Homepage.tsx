@@ -6,6 +6,7 @@ const Homepage = () => (
   <React.Fragment>
     <Introduction />
     <LoginBtnGoogle />
+    asd
   </React.Fragment>
 );
 
