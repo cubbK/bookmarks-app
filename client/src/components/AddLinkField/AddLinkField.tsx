@@ -9,34 +9,27 @@ const Wrapper = styled.div`
   grid-column-gap: 20px;
 `;
 
-class AddLinkField extends React.Component {
-  state = {
-    inputText: ""
-  };
-  handleChange = event => {
-    this.setState({
-      inputText: event.target.value
-    });
-  };
-
-  render() {
-    return (
-      <Wrapper>
-        <TextField
-          id="new-link"
-          label="Link"
-          value={this.state.inputText}
-          onChange={this.handleChange}
-          margin="none"
-          autoFocus={true}
-          fullWidth={true}
-        />
-        <Button variant="contained" color="secondary">
-          Add
-        </Button>
-      </Wrapper>
-    );
-  }
+interface Props {
+  handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
+  onButtonClick: (event: React.MouseEvent<HTMLButtonElement>) => any;
+  value: string;
 }
+
+const AddLinkField = (props: Props) => (
+  <Wrapper>
+    <TextField
+      id="new-link"
+      label="Link"
+      value={props.value}
+      onChange={props.handleInputChange}
+      margin="none"
+      autoFocus={true}
+      fullWidth={true}
+    />
+    <Button variant="contained" color="secondary" onClick={props.onButtonClick}>
+      Add
+    </Button>
+  </Wrapper>
+);
 
 export default AddLinkField;

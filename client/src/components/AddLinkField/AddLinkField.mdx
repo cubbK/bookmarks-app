@@ -1,16 +1,20 @@
 ---
 name: AddLinkField 
+menu: Components
 ---
 
 import { PropsTable, Playground } from 'docz'
 import AddLinkField from './AddLinkField.tsx'
 
 # AddLinkField
+The component uses an controlled input. The input text is changed only if value prop changes
 
 ## Properties
 <PropsTable of={AddLinkField} />
 
 ## Basic usage
+
 <Playground>
-  <AddLinkField />
+  
+  <AddLinkField value={"it works 1"}/>
 </Playground>
