@@ -13,23 +13,39 @@ interface Props {
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
   onButtonClick: (event: React.MouseEvent<HTMLButtonElement>) => any;
   value: string;
+  toAutoFocus?: boolean;
 }
 
-const AddLinkField = (props: Props) => (
-  <Wrapper>
-    <TextField
-      id="new-link"
-      label="Link"
-      value={props.value}
-      onChange={props.handleInputChange}
-      margin="none"
-      autoFocus={true}
-      fullWidth={true}
-    />
-    <Button variant="contained" color="secondary" onClick={props.onButtonClick}>
-      Add
-    </Button>
-  </Wrapper>
-);
+class AddLinkField extends React.Component<Props> {
+  static defaultProps: Partial<Props> = {
+    toAutoFocus: false
+  };
+
+  onEnterPress = handle => event => (event.key === "Enter" ? handle() : null);
+
+  render() {
+    return (
+      <Wrapper>
+        <TextField
+          id="new-link"
+          label="Link"
+          value={this.props.value}
+          onChange={this.props.handleInputChange}
+          margin="none"
+          autoFocus={true}
+          fullWidth={true}
+          onKeyPress={this.onEnterPress(this.props.onButtonClick)}
+        />
+        <Button
+          variant="contained"
+          color="secondary"
+          onClick={this.props.onButtonClick}
+        >
+          Add
+        </Button>
+      </Wrapper>
+    );
+  }
+}
 
 export default AddLinkField;

@@ -12,7 +12,9 @@ class AddLinkFieldContainer extends React.Component {
     });
   };
 
-  onButtonClick = event => {};
+  onButtonClick = event => {
+    console.log(123);
+  };
 
   render() {
     return (
