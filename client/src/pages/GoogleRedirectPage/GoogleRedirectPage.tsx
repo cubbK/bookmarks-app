@@ -21,7 +21,7 @@ class GoogleRedirectPage extends React.Component<IProps> {
 
   public async componentDidMount() {
     const params = queryString.parse(window.location.search);
-    const requestUrl = `http://${API_URL}google/getUserByCodeAndSetRefreshToken`;
+    const requestUrl = `${API_URL}google/getUserByCodeAndSetRefreshToken`;
     console.log(requestUrl);
     try {
       const request = await axios.post(requestUrl, {
