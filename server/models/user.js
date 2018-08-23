@@ -72,11 +72,8 @@ exports.getUserByAccessToken = async userId => {
 
     const userByGoogleId = await User.findOne({ googleId }).exec();
 
-    // return {
-    //   links: userByGoogleId.links
-    // };
     return {
-      links: ["testLink1", "testLink2"]
+      links: userByGoogleId.links
     };
   } catch (err) {
     console.log(err.message);

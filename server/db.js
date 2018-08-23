@@ -3,7 +3,12 @@ mongoose
   .connect(
     "mongodb://" + process.env.DB,
     {
-      useNewUrlParser: true
+      useNewUrlParser: true,
+      user: "root",
+      pass: "root",
+      auth: {
+        authdb: "admin"
+      }
     }
   )
   .then(
