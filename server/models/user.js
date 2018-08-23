@@ -2,10 +2,14 @@ const mongoose = require("mongoose");
 const findOrCreate = require("mongoose-find-or-create");
 const { oauth2Client } = require("../googleClient");
 
+const linkSchema = new mongoose.Schema({
+  url: String
+});
+
 const userSchema = new mongoose.Schema({
   googleId: String,
   googleRefreshToken: String,
-  links: [mongoose.Schema.Types.ObjectId]
+  links: [linkSchema]
 });
 userSchema.plugin(findOrCreate);
 
