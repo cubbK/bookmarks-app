@@ -9,6 +9,10 @@ const Wrapper = styled.div`
   grid-column-gap: 20px;
 `;
 
+const TextFieldStyled = styled(TextField)`
+  font-size: 1.5em;
+`;
+
 interface Props {
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
   onButtonClick: (event: React.MouseEvent<HTMLButtonElement>) => any;
@@ -26,13 +30,13 @@ class AddLinkField extends React.Component<Props> {
   render() {
     return (
       <Wrapper>
-        <TextField
+        <TextFieldStyled
           id="new-link"
           label="Link"
           value={this.props.value}
           onChange={this.props.handleInputChange}
           margin="none"
-          autoFocus={true}
+          autoFocus={this.props.toAutoFocus}
           fullWidth={true}
           onKeyPress={this.onEnterPress(this.props.onButtonClick)}
         />

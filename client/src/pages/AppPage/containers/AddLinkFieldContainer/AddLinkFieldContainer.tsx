@@ -1,7 +1,13 @@
 import * as React from "react";
 import AddLinkField from "components/AddLinkField/AddLinkField";
+import { connect } from "react-redux";
+import { addLink } from "actions/linkActions";
 
-class AddLinkFieldContainer extends React.Component {
+interface Props {
+  addLink: (link: string) => void;
+}
+
+class AddLinkFieldContainer extends React.Component<Props> {
   state = {
     inputText: ""
   };
@@ -13,7 +19,7 @@ class AddLinkFieldContainer extends React.Component {
   };
 
   onButtonClick = event => {
-    console.log(123);
+    this.props.addLink(this.state.inputText);
   };
 
   render() {
@@ -27,4 +33,7 @@ class AddLinkFieldContainer extends React.Component {
   }
 }
 
-export default AddLinkFieldContainer;
+export default connect(
+  null,
+  { addLink }
+)(AddLinkFieldContainer);

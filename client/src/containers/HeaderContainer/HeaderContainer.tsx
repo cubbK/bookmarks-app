@@ -8,7 +8,17 @@ interface IProps {
 }
 
 class HeaderContainer extends React.Component<IProps> {
-  public render() {
+  onLogoutClick = () => {
+    console.log("logout");
+    this.props.setUserJWT(null);
+  };
+
+  onProfileClick = () => {
+    console.log("profile");
+    console.log("does nothing yet");
+  };
+
+  render() {
     return (
       <Header
         onLogoutClick={this.onLogoutClick}
@@ -16,16 +26,6 @@ class HeaderContainer extends React.Component<IProps> {
       />
     );
   }
-
-  private onLogoutClick = () => {
-    console.log("logout");
-    this.props.setUserJWT(null);
-  };
-
-  private onProfileClick = () => {
-    console.log("profile");
-    console.log("does nothing yet");
-  };
 }
 
 export default connect(
