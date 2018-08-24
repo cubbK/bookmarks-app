@@ -2,9 +2,10 @@ import * as React from "react";
 import AddLinkField from "components/AddLinkField/AddLinkField";
 import { connect } from "react-redux";
 import { addLink } from "actions/linkActions";
-
+import { IStoreState } from "reducers";
 interface Props {
-  addLink: (link: string) => void;
+  addLink: (link: string, userJWT: string) => void;
+  userJWT: string;
 }
 
 class AddLinkFieldContainer extends React.Component<Props> {
@@ -19,7 +20,7 @@ class AddLinkFieldContainer extends React.Component<Props> {
   };
 
   onButtonClick = event => {
-    this.props.addLink(this.state.inputText);
+    this.props.addLink(this.state.inputText, this.props.userJWT);
   };
 
   render() {
@@ -34,6 +35,8 @@ class AddLinkFieldContainer extends React.Component<Props> {
 }
 
 export default connect(
-  null,
+  (state: IStoreState) => ({
+    userJWT: state.userJWT
+  }),
   { addLink }
 )(AddLinkFieldContainer);

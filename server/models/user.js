@@ -88,3 +88,14 @@ exports.getUserByAccessToken = async userId => {
 
   // const tokenInfo = await oAuth2client.getTokenInfo('my-access-token');
 };
+
+exports.addLink = async (userId, link) => {
+  // const user = await User.findOne({ _id: userId }).exec();
+  return User.findOneAndUpdate(
+    { _id: userId },
+    {
+      $push: { links: { url: link } }
+    },
+    { new: true }
+  ).exec();
+};

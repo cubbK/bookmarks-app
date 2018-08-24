@@ -23,7 +23,7 @@ class LinkListContainer extends React.Component<IProps> {
 
   mapLinks = () => {
     return this.props.userData.links.map((link, i) => (
-      <div key={i}>{link}</div>
+      <div key={link._id}>{link.url}</div>
     ));
   };
 

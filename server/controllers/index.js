@@ -1,7 +1,8 @@
-const combineRouters = require('koa-combine-routers')
+const combineRouters = require("koa-combine-routers");
 
 const combinedRouter = combineRouters(
-  require('./googleUser')
-)
+  require("./googleUser"),
+  require("./user")
+);
 
-module.exports = combinedRouter
+module.exports = combinedRouter;

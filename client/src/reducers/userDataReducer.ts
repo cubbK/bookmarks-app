@@ -4,7 +4,7 @@ export interface IState {
   loading: boolean;
   hasErrored: boolean;
   errorMessage: string | null;
-  links: Array<string>;
+  links: Array<{ _id: string; url: string }>;
 }
 
 const defaultState: IState = {
