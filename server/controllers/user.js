@@ -27,7 +27,10 @@ router.post("/addLink", async (ctx, next) => {
 
     const updatedUser = await User.addLink(userId, link);
 
-    ctx.response = "123";
+    ctx.response.body = {
+      _id: updatedUser.links[updatedUser.links.length - 1]._id,
+      url: link
+    };
   } catch (err) {
     ctx.throw(400, err.status);
   }

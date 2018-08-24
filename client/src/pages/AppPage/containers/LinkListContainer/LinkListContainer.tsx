@@ -22,12 +22,13 @@ class LinkListContainer extends React.Component<IProps> {
   }
 
   mapLinks = () => {
-    return this.props.userData.links.map((link, i) => (
+    return this.props.userData.links.map(link => (
       <div key={link._id}>{link.url}</div>
     ));
   };
 
   render() {
+    console.log(this.props.userData);
     if (this.props.userData.loading) {
       return <LinearProgress color="secondary" />;
     } else if (this.props.userData.hasErrored) {

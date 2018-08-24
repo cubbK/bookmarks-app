@@ -29,5 +29,7 @@ export default (state = defaultState, action) =>
         draft.hasErrored = true;
         draft.errorMessage = action.payload.response.data;
         break;
+      case "ADD_LINK_FULFILLED":
+        draft.links.push(action.payload.data);
     }
   });
