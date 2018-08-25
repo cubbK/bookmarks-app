@@ -10,6 +10,8 @@ import userDataReducer, {
 import LinearProgress from "@material-ui/core/LinearProgress";
 import LoginFailedContainer from "containers/LoginFailedContainer/LoginFailedContainer";
 
+import LinkList from "pages/AppPage/components/LinkList/LinkList";
+
 interface IProps {
   userJWT: string;
   userData: UserDataInterface;
@@ -37,10 +39,44 @@ class LinkListContainer extends React.Component<IProps> {
       );
     } else {
       return (
-        <div>
-          Links
-          {this.mapLinks()}
-        </div>
+        <LinkList
+          groups={[
+            {
+              groupName: "youtube.com",
+              links: [
+                {
+                  _id: "5b813f8a0bb0b2596c5faeaa",
+                  url: "https://www.youtube.com/watch?v=UXt0AEkQmWU&t=1376s"
+                },
+                {
+                  _id: "5b813f9b0bb0b2596c5faeab",
+                  url: "https://www.youtube.com/watch?v=UXt0AEkQmWU&t=1376s"
+                },
+                {
+                  _id: "5b813fbb0bb0b2596c5faeac",
+                  url: "https://www.youtube.com/watch?v=3pSuxyigKto"
+                }
+              ]
+            },
+            {
+              groupName: "ycombinator.com",
+              links: [
+                {
+                  _id: "5b8140b10bb0b2596c5faeae",
+                  url: "https://news.ycombinator.com/item?id=17838887"
+                },
+                {
+                  _id: "5b8140c50bb0b2596c5faeaf",
+                  url: "news.ycombinator.com/item?id=17834266"
+                },
+                {
+                  _id: "5b8140d10bb0b2596c5faeb0",
+                  url: "https://news.ycombinator.com/item?id=17834380"
+                }
+              ]
+            }
+          ]}
+        />
       );
     }
   }

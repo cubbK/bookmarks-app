@@ -9,7 +9,7 @@ import {
 import styled from "styled-components";
 
 const InlineCard = styled(Card)`
-  display: inline-block;
+  display: block;
 `;
 
 export interface IProps {

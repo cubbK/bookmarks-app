@@ -8,7 +8,6 @@ const AppPage = () => (
     <HeaderContainer />
     <AddLinkFieldContainer />
     <LinkListContainer />
-    AppPage
   </div>
 );
 
