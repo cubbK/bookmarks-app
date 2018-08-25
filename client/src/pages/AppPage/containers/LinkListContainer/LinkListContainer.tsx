@@ -42,6 +42,7 @@ class LinkListContainer extends React.Component<IProps> {
         <LinkList
           groups={[
             {
+              id: "newId1",
               groupName: "youtube.com",
               links: [
                 {
@@ -59,6 +60,7 @@ class LinkListContainer extends React.Component<IProps> {
               ]
             },
             {
+              id: "newId2",
               groupName: "ycombinator.com",
               links: [
                 {

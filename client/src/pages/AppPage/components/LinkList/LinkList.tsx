@@ -10,6 +10,7 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 
 interface IProps {
   groups: Array<{
+    id: string;
     groupName: string;
     links: Array<any>;
   }>;
@@ -17,12 +18,10 @@ interface IProps {
 
 class LinkList extends React.Component<IProps> {
   state = {
-    open: false
+    openGroupsId: []
   };
 
-  handleClick = () => {
-    this.setState({ open: !this.state.open });
-  };
+  toggleGroupList = groupId => () => {};
 
   mapGroups = () => {
     const mapLink = link => (
@@ -31,9 +30,9 @@ class LinkList extends React.Component<IProps> {
       </ListItem>
     );
 
-    const mapGroup = (group, i) => (
-      <React.Fragment key={i}>
-        <ListItem button={true} onClick={this.handleClick}>
+    const mapGroup = group => (
+      <React.Fragment key={group.id}>
+        <ListItem button={true} onClick={this.toggleGroupList(group.id)}>
           <ListItemText primary={group.groupName} />
           {this.state.open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
@@ -46,7 +45,6 @@ class LinkList extends React.Component<IProps> {
     );
 
     const groups = this.props.groups.map(mapGroup);
-    console.log(groups);
     return groups;
   };
 
