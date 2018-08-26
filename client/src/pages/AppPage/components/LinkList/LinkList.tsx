@@ -7,6 +7,7 @@ import Collapse from "@material-ui/core/Collapse";
 
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
+import { contains } from "ramda";
 
 interface IProps {
   groups: Array<{
@@ -21,7 +22,25 @@ class LinkList extends React.Component<IProps> {
     openGroupsId: []
   };
 
-  toggleGroupList = groupId => () => {};
+  toggleGroupList = (groupId: string) => () => {
+    const isOpen = contains(groupId, this.state.openGroupsId);
+    if (isOpen) {
+      const openGroupsId = [...this.state.openGroupsId];
+      const openGroupsIdWithoutCurrentOne = openGroupsId.filter(
+        stateGroupId => stateGroupId !== groupId
+      );
+      this.setState({
+        openGroupsId: openGroupsIdWithoutCurrentOne
+      });
+    } else {
+      const newOpenGroupsId = [...this.state.openGroupsId, groupId];
+      this.setState({
+        openGroupsId: newOpenGroupsId
+      });
+    }
+  };
+
+  isGroupOpen = groupId => contains(groupId, this.state.openGroupsId);
 
   mapGroups = () => {
     const mapLink = link => (
@@ -34,9 +53,13 @@ class LinkList extends React.Component<IProps> {
       <React.Fragment key={group.id}>
         <ListItem button={true} onClick={this.toggleGroupList(group.id)}>
           <ListItemText primary={group.groupName} />
-          {this.state.open ? <ExpandLess /> : <ExpandMore />}
+          {this.isGroupOpen(group.id) ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
-        <Collapse in={this.state.open} timeout="auto" unmountOnExit={true}>
+        <Collapse
+          in={this.isGroupOpen(group.id)}
+          timeout="auto"
+          unmountOnExit={true}
+        >
           <List component="div" disablePadding={true} dense={true}>
             {group.links.map(mapLink)}
           </List>
