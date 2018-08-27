@@ -2,10 +2,8 @@ import * as React from "react";
 import { IStoreState } from "reducers";
 
 import { connect } from "react-redux";
-import { getUserFromJWTString } from "actions/authActions";
-import userDataReducer, {
-  IState as UserDataInterface
-} from "reducers/userDataReducer";
+import { getLinksByGroup } from "selectors";
+import { IState as UserDataInterface } from "reducers/userDataReducer";
 
 import LinearProgress from "@material-ui/core/LinearProgress";
 import LoginFailedContainer from "containers/LoginFailedContainer/LoginFailedContainer";
@@ -13,16 +11,10 @@ import LoginFailedContainer from "containers/LoginFailedContainer/LoginFailedCon
 import LinkList from "pages/AppPage/components/LinkList/LinkList";
 
 interface IProps {
-  userJWT: string;
   userData: UserDataInterface;
-  getUserFromJWTString: (JWTString: string) => void;
 }
 
 class LinkListContainer extends React.Component<IProps> {
-  componentDidMount() {
-    this.props.getUserFromJWTString(this.props.userJWT);
-  }
-
   mapLinks = () => {
     return this.props.userData.links.map(link => (
       <div key={link._id}>{link.url}</div>
@@ -86,12 +78,9 @@ class LinkListContainer extends React.Component<IProps> {
 
 function mapStateToProps(state: IStoreState) {
   return {
-    userJWT: state.userJWT,
-    userData: state.userData
+    userData: state.userData,
+    links: getLinksByGroup(state)
   };
 }
 
-export default connect(
-  mapStateToProps,
-  { getUserFromJWTString }
-)(LinkListContainer);
+export default connect(mapStateToProps)(LinkListContainer);

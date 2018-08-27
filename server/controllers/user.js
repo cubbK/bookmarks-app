@@ -1,6 +1,7 @@
 const Router = require("koa-router");
 const User = require("../models/user");
-var jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
+const axios = require("axios");
 
 const router = new Router({
   prefix: "/user"
