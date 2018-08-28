@@ -2,33 +2,36 @@ const mongoose = require("mongoose");
 const findOrCreate = require("mongoose-find-or-create");
 const { oauth2Client } = require("../googleClient");
 
+const infoSchema = new mongoose.Schema({
+  title: String,
+  iconHref: String,
+  err: String
+});
+
 const linkSchema = new mongoose.Schema({
-  url: String
+  url: {
+    type: String,
+    required: true
+  },
+  groupName: String,
+  info: infoSchema
 });
 
 const userSchema = new mongoose.Schema({
-  googleId: String,
-  googleRefreshToken: String,
+  googleId: {
+    type: String,
+    required: true
+  },
+  googleRefreshToken: {
+    type: String,
+    required: true
+  },
   links: [linkSchema]
 });
 userSchema.plugin(findOrCreate);
 
 const User = mongoose.model("User", userSchema);
 exports.User = User;
-
-exports.add = () => {
-  const user1 = new User({ email: "email1" });
-  user1.save(function(err) {
-    if (err) return handleError(err);
-    // saved!
-  });
-};
-
-exports.getAll = async () => {
-  const users = await User.find({});
-  console.log(users);
-  return users;
-};
 
 exports.setUserField = (googleId, field, value) => {
   const fieldsToUpdate = { [field]: value };
@@ -89,12 +92,16 @@ exports.getUserByAccessToken = async userId => {
   // const tokenInfo = await oAuth2client.getTokenInfo('my-access-token');
 };
 
+const getPageInfo = require("../helpers/getPageinfo");
+const getGroupNameFromLink = require("../helpers/getGroupNameFromLink");
 exports.addLink = async (userId, link) => {
-  // const user = await User.findOne({ _id: userId }).exec();
+  const info = await getPageInfo(link);
+  const groupName = getGroupNameFromLink(link);
+
   return User.findOneAndUpdate(
     { _id: userId },
     {
-      $push: { links: { url: link } }
+      $push: { links: { url: link, info, groupName } }
     },
     { new: true }
   ).exec();

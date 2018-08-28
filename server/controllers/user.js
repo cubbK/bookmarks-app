@@ -1,7 +1,6 @@
 const Router = require("koa-router");
 const User = require("../models/user");
 const jwt = require("jsonwebtoken");
-const axios = require("axios");
 
 const router = new Router({
   prefix: "/user"
@@ -30,9 +29,11 @@ router.post("/addLink", async (ctx, next) => {
 
     ctx.response.body = {
       _id: updatedUser.links[updatedUser.links.length - 1]._id,
-      url: link
+      url: link,
+      info: updatedUser.links[updatedUser.links.length - 1].info
     };
   } catch (err) {
+    console.log(err);
     ctx.throw(400, err.status);
   }
 
