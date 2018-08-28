@@ -27,10 +27,12 @@ router.post("/addLink", async (ctx, next) => {
 
     const updatedUser = await User.addLink(userId, link);
 
+    const lastLink = updatedUser.links[updatedUser.links.length - 1];
     ctx.response.body = {
-      _id: updatedUser.links[updatedUser.links.length - 1]._id,
+      _id: lastLink._id,
       url: link,
-      info: updatedUser.links[updatedUser.links.length - 1].info
+      info: lastLink.info,
+      groupName: lastLink.groupName
     };
   } catch (err) {
     console.log(err);
