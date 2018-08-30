@@ -7,7 +7,7 @@ import LinkListGroup from "./components/LinkListGroup/LinkListGroup";
 import { ILinksGrouped } from "selectors/getLinksByGroup";
 
 interface IProps {
-  groups: any;
+  groups: ILinksGrouped;
 }
 
 class LinkList extends React.Component<IProps> {
@@ -27,6 +27,7 @@ class LinkList extends React.Component<IProps> {
   };
 
   render() {
+    console.log(this.props.groups);
     return (
       <div>
         <List component="nav">{this.mapGroups()}</List>
