@@ -1,12 +1,13 @@
 import produce from "immer";
 
-export interface ILinks
-  extends Array<{
-      _id: string;
-      url: string;
-      groupName: string;
-      info: ILinkInfo;
-    }> {}
+export interface ILink {
+  _id: string;
+  url: string;
+  groupName: string;
+  info: ILinkInfo;
+}
+
+export interface ILinks extends Array<ILink> {}
 
 export interface ILinkInfo {
   _id: string;

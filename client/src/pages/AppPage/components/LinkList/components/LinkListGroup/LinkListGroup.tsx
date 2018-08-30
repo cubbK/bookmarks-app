@@ -10,12 +10,11 @@ import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 
+import { ILinks } from "reducers/userDataReducer";
+
 interface IProps {
-  group: {
-    id: string;
-    groupName: string;
-    links: Array<{ _id: string; url: string }>;
-  };
+  group: any;
+  groupName: string;
 }
 
 interface IState {
@@ -35,15 +34,18 @@ class LinkListGroup extends React.Component<IProps, IState> {
 
   render() {
     const group = this.props.group;
+    const groupName = this.props.groupName;
+
+    console.log("LinkListGroup", group, groupName);
     return (
       <React.Fragment>
         <ListItem button={true} onClick={this.toggleOpenState}>
-          <ListItemText primary={group.groupName} />
+          <ListItemText primary={groupName} />
           {this.state.open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={this.state.open} timeout="auto" unmountOnExit={true}>
           <List component="div" disablePadding={true} dense={true}>
-            {group.links.map(link => (
+            {group.map(link => (
               <LinkListItem link={link} key={link._id} />
             ))}
           </List>

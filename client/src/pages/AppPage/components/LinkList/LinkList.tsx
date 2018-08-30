@@ -1,14 +1,13 @@
 import * as React from "react";
+import { mapObjIndexed, compose, map, curry } from "ramda";
 import List from "@material-ui/core/List";
 
 import LinkListGroup from "./components/LinkListGroup/LinkListGroup";
 
+import { ILinksGrouped } from "selectors/getLinksByGroup";
+
 interface IProps {
-  groups: Array<{
-    id: string;
-    groupName: string;
-    links: Array<{ _id: string; url: string }>;
-  }>;
+  groups: any;
 }
 
 class LinkList extends React.Component<IProps> {
@@ -16,10 +15,14 @@ class LinkList extends React.Component<IProps> {
     openGroupsId: []
   };
 
-  mapGroups = () => {
-    const groups = this.props.groups.map(group => (
-      <LinkListGroup group={group} key={group.groupName} />
-    ));
+  mapGroups = (): Array<any> => {
+    let groups = compose(
+      map(([key, arr]) => (
+        <LinkListGroup group={arr} groupName={key} key={key} />
+      )),
+      groups => Object.entries(groups)
+    )(this.props.groups);
+
     return groups;
   };
 
@@ -27,6 +30,7 @@ class LinkList extends React.Component<IProps> {
     return (
       <div>
         <List component="nav">{this.mapGroups()}</List>
+        123
       </div>
     );
   }
