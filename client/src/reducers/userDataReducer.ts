@@ -1,10 +1,25 @@
 import produce from "immer";
 
+export interface ILinks
+  extends Array<{
+      _id: string;
+      url: string;
+      groupName: string;
+      info: ILinkInfo;
+    }> {}
+
+export interface ILinkInfo {
+  _id: string;
+  title?: string;
+  iconHref?: string;
+  err?: string;
+}
+
 export interface IState {
   loading: boolean;
   hasErrored: boolean;
   errorMessage: string | null;
-  links: Array<{ _id: string; url: string }>;
+  links: ILinks;
 }
 
 const defaultState: IState = {

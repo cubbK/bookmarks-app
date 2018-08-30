@@ -2,7 +2,7 @@ import * as React from "react";
 import { IStoreState } from "reducers";
 
 import { connect } from "react-redux";
-import { getLinksByGroup } from "selectors";
+import getLinksByGroup from "selectors/getLinksByGroup";
 import { IState as UserDataInterface } from "reducers/userDataReducer";
 
 import LinearProgress from "@material-ui/core/LinearProgress";
@@ -22,7 +22,6 @@ class LinkListContainer extends React.Component<IProps> {
   };
 
   render() {
-    console.log(this.props.userData);
     if (this.props.userData.loading) {
       return <LinearProgress color="secondary" />;
     } else if (this.props.userData.hasErrored) {
