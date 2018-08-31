@@ -17,3 +17,9 @@ export function addLink(link: string, userJWT: string) {
     )
   };
 }
+
+export function resetAddLinkState() {
+  return {
+    type: "RESET_ADD_LINK_STATE"
+  };
+}

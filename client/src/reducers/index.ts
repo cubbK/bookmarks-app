@@ -10,13 +10,13 @@ import addLinkReducer, { IState as addLinkInterface } from "./addLinkReducer";
 export interface IStoreState {
   userJWT: string | null;
   userData: userDataInterface;
-  addLink: addLinkInterface;
+  addLinkState: addLinkInterface;
 }
 
 const combinedReducers: Reducer<IStoreState> = combineReducers<IStoreState>({
   userJWT: UserJWTReducer,
   userData: userDataReducer,
-  addLink: addLinkReducer
+  addLinkState: addLinkReducer
 });
 
 export default combinedReducers;

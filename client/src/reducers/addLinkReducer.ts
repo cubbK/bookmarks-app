@@ -19,15 +19,18 @@ export default (state = defaultState, action) =>
     switch (action.type) {
       case "ADD_LINK_PENDING":
         draft.pending = true;
-        break;
+        return;
       case "ADD_LINK_FULFILLED":
         draft.pending = false;
         draft.fulfilled = true;
-        break;
+        return;
       case "ADD_LINK_REJECTED":
         draft.pending = false;
         draft.errored = true;
         draft.errorMsg = action.payload.body;
-        break;
+        return;
+      case "RESET_ADD_LINK_STATE":
+        return defaultState;
     }
+    return;
   });

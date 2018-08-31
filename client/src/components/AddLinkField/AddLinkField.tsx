@@ -13,15 +13,16 @@ const TextFieldStyled = styled(TextField)`
   font-size: 1.5em;
 `;
 
-interface Props {
+interface IProps {
   handleInputChange: (event: React.ChangeEvent<HTMLInputElement>) => any;
   onButtonClick: (event: React.MouseEvent<HTMLButtonElement>) => any;
   value: string;
   toAutoFocus?: boolean;
+  pending: boolean;
 }
 
-class AddLinkField extends React.Component<Props> {
-  static defaultProps: Partial<Props> = {
+class AddLinkField extends React.Component<IProps> {
+  static defaultProps: Partial<IProps> = {
     toAutoFocus: false
   };
 
@@ -44,6 +45,7 @@ class AddLinkField extends React.Component<Props> {
           variant="contained"
           color="secondary"
           onClick={this.props.onButtonClick}
+          disabled={this.props.pending}
         >
           Add
         </Button>
