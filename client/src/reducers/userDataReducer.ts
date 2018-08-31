@@ -47,5 +47,6 @@ export default (state = defaultState, action) =>
         break;
       case "ADD_LINK_FULFILLED":
         draft.links.push(action.payload.data);
+        break;
     }
   });
