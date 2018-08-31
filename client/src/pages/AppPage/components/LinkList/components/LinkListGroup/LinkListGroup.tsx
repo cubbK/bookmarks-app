@@ -13,7 +13,7 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import { ILinks } from "reducers/userDataReducer";
 
 interface IProps {
-  group: any;
+  group: ILinks;
   groupName: string;
 }
 
@@ -35,16 +35,14 @@ class LinkListGroup extends React.Component<IProps, IState> {
   render() {
     const group = this.props.group;
     const groupName = this.props.groupName;
-
-    console.log("LinkListGroup", group, groupName);
     return (
       <React.Fragment>
         <ListItem button={true} onClick={this.toggleOpenState}>
-          <ListItemText primary={groupName} />
+          <ListItemText>{groupName}</ListItemText>
           {this.state.open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={this.state.open} timeout="auto" unmountOnExit={true}>
-          <List component="div" disablePadding={true} dense={true}>
+          <List component="ul" disablePadding={true} dense={true}>
             {group.map(link => (
               <LinkListItem link={link} key={link._id} />
             ))}
