@@ -13,40 +13,34 @@ import LinkList from './LinkList.tsx'
 
 ## Basic usage
 <Playground>
-  <LinkList groups={[
-    {
-      groupName: "youtube.com",
-      links: [
-        {
-        _id: '5b813f8a0bb0b2596c5faeaa',
-        url: 'https://www.youtube.com/watch?v=UXt0AEkQmWU&t=1376s'
-      },
-      {
-        _id: '5b813f9b0bb0b2596c5faeab',
-        url: 'https://www.youtube.com/watch?v=UXt0AEkQmWU&t=1376s'
-      },
-      {
-        _id: '5b813fbb0bb0b2596c5faeac',
-        url: 'https://www.youtube.com/watch?v=3pSuxyigKto'
-      }
+  <LinkList 
+    groups={{
+      "youtube.com":[
+        {"_id":"5b85b3884bdea04095750ca9","url":"https://www.youtube.com/watch?v=ESUXFCht6yk&index=5&list=PL5uGqWoFgvd1SBExRyHuuVxiLiU8u8-PN&t=0s","info":{"_id":"5b85b3884bdea04095750caa","title":"Predicting Swedish Vowel Length - YouTube","iconHref":"/yts/img/favicon_32-vflOogEID.png"},"groupName":"youtube.com"},
+        {"_id":"5b85b3b6752f30459cc547ba","url":"https://www.youtube.com/watch?v=UHuT-Tk0B08&t=406s","info":{"_id":"5b85b3b6752f30459cc547bb","title":"Best GLITCH HOP Gaming Mix 2017 #7 - YouTube","iconHref":"/yts/img/favicon_32-vflOogEID.png"},"groupName":"youtube.com"},
+        {"_id":"5b8988468b13a49e88042e37","url":"https://www.youtube.com/watch?v=SJZqgjDymbI&t=902s","info":{"_id":"5b8988468b13a49e88042e38","title":"Steins;Gate - Episode 2 (Live Reaction) - YouTube","iconHref":"/yts/img/favicon_32-vflOogEID.png"},"groupName":"youtube.com"}
+      ],
+      "duckduckgo.com":[
+        {"_id":"5b85b3be752f30459cc547be","url":"https://duckduckgo.com/?q=react+typescript+demo&atb=v128-7_f&ia=software","info":{"_id":"5b85b3be752f30459cc547bf","title":"react typescript demo at DuckDuckGo"},"groupName":"duckduckgo.com"},
+        {"_id":"5b85b3c7752f30459cc547c3","url":"https://duckduckgo.com/?q=mongoose+find+subdocument&atb=v128-7_f&ia=qa","info":{"_id":"5b85b3c7752f30459cc547c4","title":"mongoose find subdocument at DuckDuckGo"},"groupName":"duckduckgo.com"},
+        {"_id":"5b85b3cd752f30459cc547c9","url":"https://duckduckgo.com/?q=mongoose+schema+maybe&atb=v128-7_f&ia=qa","info":{"_id":"5b85b3cd752f30459cc547ca","title":"mongoose schema maybe at DuckDuckGo"},"groupName":"duckduckgo.com"}
       ]
-    },
-    {
-      groupName: "ycombinator.com",
-      links: [
+    }}
+  />
+</Playground>
+
+## Long Text everywhere
+<Playground>
+  <LinkList
+    groups={{
+      "youtubeeeeeeeeeeeeeeeeeeeeeeeeeeeesasdaasdasdasdasdssssssssssss.comyoutubeeeeeeeeeeeeeeeeeeeeeeeeeeeesasdaasdasdasdasdssssssssssss.comyoutubeeeeeeeeeeeeeeeeeeeeeeeeeeeesasdaasdasdasdasdssssssssssss.com": [
         {
-        _id: '5b8140b10bb0b2596c5faeae',
-        url: 'https://news.ycombinator.com/item?id=17838887'
-      },
-      {
-        _id: '5b8140c50bb0b2596c5faeaf',
-        url: 'news.ycombinator.com/item?id=17834266'
-      },
-      {
-        _id: '5b8140d10bb0b2596c5faeb0',
-        url: 'https://news.ycombinator.com/item?id=17834380'
-      }
+          "_id":"5b85b3884bdea04095750ca9",
+          "url":"https://www.youtube.com/watch?v=ESUXFCht6yk&index=5&list=PL5uGqWoFgvd1SBExRyHuuVxiLiU8u8-PN&t=0sL5uGqWoFgvd1SBExRyHuuVxiLiU8u8-PN&t=0sL5uGqWoFgvd1SBExRyHuuVxiLiU8u8-PN&t=0sL5uGqWoFgvd1SBExRyHuuVxiLiU8u8-PN&t=0s",
+          "info":{"_id":"5b85b3884bdea04095750caa","title":"Cat ipsum dolor sit amet, head nudges but poop on grasses, for the cat was chasing the mouse weigh eight pounds but take up a full-size bed.",
+          "iconHref":"/yts/img/favicon_32-vflOogEID.png"},"groupName":"youtube.com"
+        }
       ]
-    }
-  ]}/>
+    }}
+  />
 </Playground>

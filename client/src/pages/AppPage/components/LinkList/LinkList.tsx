@@ -11,10 +11,6 @@ interface IProps {
 }
 
 class LinkList extends React.Component<IProps> {
-  state = {
-    openGroupsId: []
-  };
-
   mapGroups = (): Array<any> => {
     let groups = compose(
       map(([key, arr]) => (
@@ -31,7 +27,6 @@ class LinkList extends React.Component<IProps> {
     return (
       <div>
         <List component="nav">{this.mapGroups()}</List>
-        123
       </div>
     );
   }

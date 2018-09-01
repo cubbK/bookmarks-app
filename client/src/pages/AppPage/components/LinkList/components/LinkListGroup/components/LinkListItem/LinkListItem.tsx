@@ -26,14 +26,21 @@ const TitleLink = styled.a`
   color: inherit;
 `;
 
-const MainColorLink = styled.a`
+const FullLink = styled.a`
   color: inherit;
+  word-break: break-all;
 `;
 
 const AvatarStyled = styled(Avatar)`
   && {
     background-color: ${props => props.theme.mainColor};
   }
+`;
+
+const WrappedListItemText = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 `;
 
 class LinkListItem extends React.Component<IProps, IState> {
@@ -53,9 +60,11 @@ class LinkListItem extends React.Component<IProps, IState> {
       <React.Fragment>
         <ListItem key={link._id} onClick={this.toggleOpenState} button={true}>
           <ListItemText>
-            <TitleLink href={link.url} target="_blank">
-              {link.info.title || link.url}
-            </TitleLink>
+            <WrappedListItemText>
+              <TitleLink href={link.url} target="_blank">
+                {link.info.title || link.url}
+              </TitleLink>
+            </WrappedListItemText>
           </ListItemText>
         </ListItem>
         <Collapse in={this.state.open} timeout="auto" unmountOnExit={true}>
@@ -76,9 +85,9 @@ class LinkListItem extends React.Component<IProps, IState> {
               <ListItemText
                 primary="Url"
                 secondary={
-                  <MainColorLink href={link.url} target="_blank">
+                  <FullLink href={link.url} target="_blank">
                     {link.url}
-                  </MainColorLink>
+                  </FullLink>
                 }
               />
             </ListItem>

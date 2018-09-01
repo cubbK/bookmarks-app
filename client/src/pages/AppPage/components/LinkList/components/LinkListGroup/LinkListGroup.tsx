@@ -10,6 +10,8 @@ import Collapse from "@material-ui/core/Collapse";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 
+import styled from "styled-components";
+
 import { ILinks } from "reducers/userDataReducer";
 
 interface IProps {
@@ -20,6 +22,12 @@ interface IProps {
 interface IState {
   open: boolean;
 }
+
+const WrappedListItemText = styled.div`
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+`;
 
 class LinkListGroup extends React.Component<IProps, IState> {
   state = {
@@ -38,7 +46,9 @@ class LinkListGroup extends React.Component<IProps, IState> {
     return (
       <React.Fragment>
         <ListItem button={true} onClick={this.toggleOpenState}>
-          <ListItemText>{groupName}</ListItemText>
+          <ListItemText>
+            <WrappedListItemText>{groupName}</WrappedListItemText>
+          </ListItemText>
           {this.state.open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
         <Collapse in={this.state.open} timeout="auto" unmountOnExit={true}>

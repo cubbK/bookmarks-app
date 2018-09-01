@@ -25,6 +25,7 @@ class LinkListContainer extends React.Component<IProps> {
   };
 
   render() {
+    console.log(this.props.linksGrouped);
     if (this.props.userData.loading) {
       return <LinearProgress color="secondary" />;
     } else if (this.props.userData.hasErrored) {
