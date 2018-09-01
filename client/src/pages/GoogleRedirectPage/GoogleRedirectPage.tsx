@@ -1,6 +1,6 @@
 import * as React from "react";
 import queryString from "query-string";
-import { API_URL } from "globals.js";
+import { API_URL } from "constants/globals";
 import axios from "axios";
 import { setUserJWT } from "actions/authActions";
 import { connect } from "react-redux";

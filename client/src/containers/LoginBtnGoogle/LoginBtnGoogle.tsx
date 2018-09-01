@@ -1,7 +1,7 @@
 import * as React from "react";
 import LoginBtn from "components/LoginBtn/LoginBtn";
 
-import { GOOGLE_CLIENT_ID, GOOGLE_REDIRECT_URI } from "globals.js";
+import { GOOGLE_CLIENT_ID, GOOGLE_REDIRECT_URI } from "constants/globals";
 
 const googleUrlWithSpaces = `
   https://accounts.google.com/o/oauth2/v2/auth?

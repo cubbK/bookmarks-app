@@ -1,9 +1,10 @@
 import axios from "axios";
-import { API_URL } from "globals.js";
+import { API_URL } from "constants/globals";
+import * as types from "constants/actionTypes";
 
 export function addLink(link: string, userJWT: string) {
   return {
-    type: "ADD_LINK",
+    type: types.ADD_LINK,
     payload: axios.post(
       `${API_URL}user/addLink`,
       {
@@ -20,6 +21,6 @@ export function addLink(link: string, userJWT: string) {
 
 export function resetAddLinkState() {
   return {
-    type: "RESET_ADD_LINK_STATE"
+    type: types.RESET_ADD_LINK_STATE
   };
 }

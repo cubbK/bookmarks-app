@@ -1,4 +1,5 @@
 import produce from "immer";
+import * as types from "constants/actionTypes";
 
 export interface ILink {
   _id: string;
@@ -33,19 +34,19 @@ const defaultState: IState = {
 export default (state = defaultState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case "GET_USER_FROM_JWT_STRING_PENDING":
+      case types.GET_USER_FROM_JWT_STRING + "_PENDING":
         draft.loading = true;
         break;
-      case "GET_USER_FROM_JWT_STRING_FULFILLED":
+      case types.GET_USER_FROM_JWT_STRING + "_FULFILLED":
         draft.loading = false;
         draft.links = action.payload.data.links;
         break;
-      case "GET_USER_FROM_JWT_STRING_REJECTED":
+      case types.GET_USER_FROM_JWT_STRING + "_REJECTED":
         draft.loading = false;
         draft.hasErrored = true;
         draft.errorMessage = action.payload.response.data;
         break;
-      case "ADD_LINK_FULFILLED":
+      case types.ADD_LINK + "_FULFILLED":
         draft.links.push(action.payload.data);
         break;
     }

@@ -1,4 +1,5 @@
 import produce from "immer";
+import * as types from "constants/actionTypes";
 
 export interface IState {
   pending: boolean;
@@ -17,19 +18,19 @@ const defaultState: IState = {
 export default (state = defaultState, action) =>
   produce(state, draft => {
     switch (action.type) {
-      case "ADD_LINK_PENDING":
+      case types.ADD_LINK + "_PENDING":
         draft.pending = true;
         return;
-      case "ADD_LINK_FULFILLED":
+      case types.ADD_LINK + "_FULFILLED":
         draft.pending = false;
         draft.fulfilled = true;
         return;
-      case "ADD_LINK_REJECTED":
+      case types.ADD_LINK + "_REJECTED":
         draft.pending = false;
         draft.errored = true;
         draft.errorMsg = action.payload.body;
         return;
-      case "RESET_ADD_LINK_STATE":
+      case types.RESET_ADD_LINK_STATE:
         return defaultState;
     }
     return;
