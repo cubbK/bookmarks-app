@@ -8,7 +8,7 @@ export interface IState {
   fulfilled: boolean;
 }
 
-const defaultState: IState = {
+export const defaultState: IState = {
   pending: false,
   errored: false,
   errorMsg: null,
