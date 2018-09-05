@@ -24,7 +24,7 @@ export interface IState {
   links: ILinks;
 }
 
-const defaultState: IState = {
+export const defaultState: IState = {
   loading: false,
   hasErrored: false,
   errorMessage: null,
