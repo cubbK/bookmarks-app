@@ -28,6 +28,27 @@ const WrappedListItemText = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-weight: 500;
+`;
+
+const LinksList = styled(List)`
+  border-left: 5px solid ${props => props.theme.mainColor};
+`;
+
+const TitleLeftIndicator = styled.div`
+  height: 60%;
+  width: 5px;
+  background-color: ${props => props.theme.mainColor};
+  position: absolute;
+  left: 0;
+  top: 48%;
+  &::after {
+    position: absolute;
+    content: "";
+    width: 15px;
+    height: 5px;
+    background-color: ${props => props.theme.mainColor};
+  }
 `;
 
 class LinkListGroup extends React.Component<IProps, IState> {
@@ -47,6 +68,7 @@ class LinkListGroup extends React.Component<IProps, IState> {
     return (
       <React.Fragment>
         <ListItem button={true} onClick={this.toggleOpenState}>
+          <TitleLeftIndicator />
           <ListItemText>
             <WrappedListItemText>{groupName}</WrappedListItemText>
           </ListItemText>
@@ -54,11 +76,11 @@ class LinkListGroup extends React.Component<IProps, IState> {
         </ListItem>
         <Divider />
         <Collapse in={this.state.open} timeout="auto" unmountOnExit={true}>
-          <List component="ul" disablePadding={true} dense={true}>
+          <LinksList component="ul" disablePadding={true} dense={true}>
             {group.map(link => (
               <LinkListItem link={link} key={link._id} />
             ))}
-          </List>
+          </LinksList>
         </Collapse>
       </React.Fragment>
     );
