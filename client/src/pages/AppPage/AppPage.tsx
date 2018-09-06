@@ -6,6 +6,8 @@ import { connect } from "react-redux";
 import { getUserFromJWTString } from "actions/authActions";
 import { IStoreState } from "reducers";
 
+import PageWidth from "components/PageWidth/PageWidth";
+
 interface IProps {
   userJWT: string;
   getUserFromJWTString: (JWTString: string) => void;
@@ -18,11 +20,13 @@ class AppPage extends React.Component<IProps> {
 
   render() {
     return (
-      <div>
+      <React.Fragment>
         <HeaderContainer />
-        <AddLinkFieldContainer />
-        <LinkListContainer />
-      </div>
+        <PageWidth>
+          <AddLinkFieldContainer />
+          <LinkListContainer />
+        </PageWidth>
+      </React.Fragment>
     );
   }
 }

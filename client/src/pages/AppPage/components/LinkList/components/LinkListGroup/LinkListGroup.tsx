@@ -9,6 +9,7 @@ import Collapse from "@material-ui/core/Collapse";
 
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
+import Divider from "@material-ui/core/Divider";
 
 import styled from "styled-components";
 
@@ -51,6 +52,7 @@ class LinkListGroup extends React.Component<IProps, IState> {
           </ListItemText>
           {this.state.open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>
+        <Divider />
         <Collapse in={this.state.open} timeout="auto" unmountOnExit={true}>
           <List component="ul" disablePadding={true} dense={true}>
             {group.map(link => (
