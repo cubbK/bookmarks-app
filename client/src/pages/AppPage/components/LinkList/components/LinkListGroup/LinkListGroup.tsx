@@ -11,6 +11,8 @@ import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import Divider from "@material-ui/core/Divider";
 
+import TitleLeftIndicator from "./components/TitleLeftIndicator/TitleLeftIndicator";
+
 import styled from "styled-components";
 
 import { ILinks } from "reducers/userDataReducer";
@@ -35,22 +37,6 @@ const LinksList = styled(List)`
   border-left: 5px solid ${props => props.theme.mainColor};
 `;
 
-const TitleLeftIndicator = styled.div`
-  height: 60%;
-  width: 5px;
-  background-color: ${props => props.theme.mainColor};
-  position: absolute;
-  left: 0;
-  top: 48%;
-  &::after {
-    position: absolute;
-    content: "";
-    width: 15px;
-    height: 5px;
-    background-color: ${props => props.theme.mainColor};
-  }
-`;
-
 class LinkListGroup extends React.Component<IProps, IState> {
   state = {
     open: false
@@ -68,7 +54,7 @@ class LinkListGroup extends React.Component<IProps, IState> {
     return (
       <React.Fragment>
         <ListItem button={true} onClick={this.toggleOpenState}>
-          <TitleLeftIndicator />
+          <TitleLeftIndicator isOpen={this.state.open} />
           <ListItemText>
             <WrappedListItemText>{groupName}</WrappedListItemText>
           </ListItemText>
