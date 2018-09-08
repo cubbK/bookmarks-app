@@ -26,11 +26,16 @@ interface IState {
   open: boolean;
 }
 
-const WrappedListItemText = styled.div`
+interface IWrappedListItemText {
+  isOpen: boolean;
+}
+
+const WrappedListItemText = styled<IWrappedListItemText, "div">("div")`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
   font-weight: 500;
+  color: ${props => (props.isOpen ? props.theme.secondaryColor : "inherit")};
 `;
 
 const LinksList = styled(List)`
@@ -56,7 +61,9 @@ class LinkListGroup extends React.Component<IProps, IState> {
         <ListItem button={true} onClick={this.toggleOpenState}>
           <TitleLeftIndicator isOpen={this.state.open} />
           <ListItemText>
-            <WrappedListItemText>{groupName}</WrappedListItemText>
+            <WrappedListItemText isOpen={this.state.open}>
+              {groupName}
+            </WrappedListItemText>
           </ListItemText>
           {this.state.open ? <ExpandLess /> : <ExpandMore />}
         </ListItem>

@@ -37,10 +37,15 @@ const AvatarStyled = styled(Avatar)`
   }
 `;
 
-const WrappedListItemText = styled.div`
+interface IWrappedListItemText {
+  isOpen: boolean;
+}
+
+const WrappedListItemText = styled<IWrappedListItemText, "div">("div")`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  color: ${props => (props.isOpen ? props.theme.secondaryColor : "inherit")};
 `;
 
 class LinkListItem extends React.Component<IProps, IState> {
@@ -60,7 +65,7 @@ class LinkListItem extends React.Component<IProps, IState> {
       <React.Fragment>
         <ListItem key={link._id} onClick={this.toggleOpenState} button={true}>
           <ListItemText>
-            <WrappedListItemText>
+            <WrappedListItemText isOpen={this.state.open}>
               <TitleLink href={link.url} target="_blank">
                 {link.info.title || link.url}
               </TitleLink>
