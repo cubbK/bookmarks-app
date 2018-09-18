@@ -42,4 +42,22 @@ router.post("/addLink", async (ctx, next) => {
   return next();
 });
 
+router.post("/setLinkFavorite", async (ctx, next) => {
+  try {
+    const userJWTDecoded = jwt.decode(ctx.request.headers["jwt-string"]);
+    const userId = userJWTDecoded.userId;
+
+    const linkId = ctx.request.body.linkId;
+    const isFavorite = ctx.request.body.isFavorite;
+
+    console.log("model update setLinkFavorite")
+
+    ctx.response.body = ctx.request.body
+
+  } catch (err) {
+    console.log(err);
+    ctx.throw(400, err.status);
+  }
+})
+
 module.exports = router;

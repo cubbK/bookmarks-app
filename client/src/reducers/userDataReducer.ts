@@ -1,5 +1,6 @@
 import produce from "immer";
 import * as types from "constants/actionTypes";
+import { linkSync } from "fs";
 
 export interface ILink {
   _id: string;
@@ -50,5 +51,16 @@ export default (state = defaultState, action) =>
       case types.ADD_LINK + "_FULFILLED":
         draft.links.push(action.payload.data);
         break;
+
+      case types.SET_LINK_FAVORITE + "_PENDING":
+        break;
+      case types.SET_LINK_FAVORITE + "_FULFILLED":
+
+        draft.links = draft.links.map(link => {
+          if (link._id === action.payload.data.linkId) {
+            link.isFavorite = action.payload.data.toFavorite;
+          }
+          return link;
+        });
     }
   });

@@ -25,12 +25,24 @@ export function resetAddLinkState() {
   };
 }
 
-export function setLinkFavorite(linkId: string, toFavorite: boolean) {
+export function setLinkFavorite(
+  linkId: string,
+  toFavorite: boolean,
+  userJWT: string
+) {
   return {
     type: types.SET_LINK_FAVORITE,
-    payload: {
-      linkId,
-      toFavorite
-    }
-  }
+    payload: axios.post(
+      `${API_URL}user/setLinkFavorite`,
+      {
+        linkId,
+        toFavorite
+      },
+      {
+        headers: {
+          "jwt-string": userJWT
+        }
+      }
+    )
+  };
 }
