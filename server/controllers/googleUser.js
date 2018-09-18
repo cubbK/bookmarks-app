@@ -22,8 +22,6 @@ router.post("/getUserByCodeAndSetRefreshToken", async (ctx, next) => {
     const userName = userInfo.given_name;
 
     const retrievedUser = await User.findOrCreateByGoogleId(userId);
-    console.log("retrieved user");
-    console.log(retrievedUser);
     await User.setUserField(userId, "googleRefreshToken", refreshToken);
 
     const responseObject = {
