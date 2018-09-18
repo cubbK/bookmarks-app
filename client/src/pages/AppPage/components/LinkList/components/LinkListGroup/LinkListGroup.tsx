@@ -1,5 +1,5 @@
 import * as React from "react";
-import LinkListItem from "./components/LinkListItem/LinkListItem";
+import LinkListItemContainer from "./containers/LinkListItemContainer/LinkListItemContainer";
 
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -71,7 +71,7 @@ class LinkListGroup extends React.Component<IProps, IState> {
         <Collapse in={this.state.open} timeout="auto" unmountOnExit={true}>
           <LinksList component="ul" disablePadding={true} dense={true}>
             {group.map(link => (
-              <LinkListItem link={link} key={link._id} />
+              <LinkListItemContainer link={link} key={link._id} />
             ))}
           </LinksList>
         </Collapse>

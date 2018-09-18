@@ -5,6 +5,7 @@ export interface ILink {
   _id: string;
   url: string;
   groupName: string;
+  isFavorite: boolean;
   info: ILinkInfo;
 }
 

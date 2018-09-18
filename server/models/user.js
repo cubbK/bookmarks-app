@@ -13,6 +13,7 @@ const linkSchema = new mongoose.Schema({
     required: true
   },
   groupName: String,
+  isFavorite: Boolean,
   info: infoSchema
 });
 
@@ -92,7 +93,7 @@ exports.addLink = async (userId, link) => {
   return User.findOneAndUpdate(
     { _id: userId },
     {
-      $push: { links: { url: link, info, groupName } }
+      $push: { links: { url: link, info, groupName, isFavorite: false } }
     },
     { new: true }
   ).exec();

@@ -18,6 +18,7 @@ import ButtonCustomColor from "components/ButtonCustomColor/ButtonCustomColor";
 import { ILink } from "reducers/userDataReducer";
 interface IProps {
   link: ILink;
+  setFavorite: (toFavorite: boolean) => () => void;
 }
 
 interface IState {
@@ -110,9 +111,23 @@ class LinkListItem extends React.Component<IProps, IState> {
               <Button variant="outlined" color="secondary">
                 Delete
               </Button>
-              <ButtonCustomColor variant="outlined" color="gold">
-                Star
-              </ButtonCustomColor>
+              {this.props.link.isFavorite ? (
+                <Button
+                  variant="outlined"
+                  color={"primary"}
+                  onClick={this.props.setFavorite(false)}
+                >
+                  Unstar
+                </Button>
+              ) : (
+                <Button
+                  variant="outlined"
+                  color={"primary"}
+                  onClick={this.props.setFavorite(true)}
+                >
+                  Star
+                </Button>
+              )}
             </ButtonsContainer>
           </List>
         </Collapse>
