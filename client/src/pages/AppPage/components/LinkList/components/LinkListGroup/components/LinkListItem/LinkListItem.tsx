@@ -5,13 +5,15 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemIcon from "@material-ui/core/ListItemIcon";
 import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
-
+import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
 
 import { Link as LinkIcon, Title as TitleIcon } from "@material-ui/icons";
 import Divider from "@material-ui/core/Divider";
 
 import styled from "styled-components";
+import { desaturate } from "polished";
+import ButtonCustomColor from "components/ButtonCustomColor/ButtonCustomColor";
 
 import { ILink } from "reducers/userDataReducer";
 interface IProps {
@@ -46,6 +48,14 @@ const WrappedListItemText = styled<IWrappedListItemText, "div">("div")`
   text-overflow: ellipsis;
   white-space: nowrap;
   color: ${props => (props.isOpen ? props.theme.secondaryColor : "inherit")};
+`;
+
+const ButtonsContainer = styled(ListItem)`
+  && {
+    display: grid;
+    grid-template-columns: [left] 1fr [right] 1fr;
+    column-gap: 5%;
+  }
 `;
 
 class LinkListItem extends React.Component<IProps, IState> {
@@ -96,6 +106,14 @@ class LinkListItem extends React.Component<IProps, IState> {
                 }
               />
             </ListItem>
+            <ButtonsContainer>
+              <Button variant="outlined" color="secondary">
+                Delete
+              </Button>
+              <ButtonCustomColor variant="outlined" color="gold">
+                Star
+              </ButtonCustomColor>
+            </ButtonsContainer>
           </List>
         </Collapse>
       </React.Fragment>

@@ -23,7 +23,6 @@ class LinkList extends React.Component<IProps> {
   };
 
   render() {
-    console.log(this.props.groups);
     return (
       <div>
         <List component="nav">{this.mapGroups()}</List>
