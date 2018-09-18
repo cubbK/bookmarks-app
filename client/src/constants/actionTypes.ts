@@ -5,3 +5,4 @@ export const GET_USER_FROM_JWT_STRING = "GET_USER_FROM_JWT_STRING";
 // link action types
 export const ADD_LINK = "ADD_LINK";
 export const RESET_ADD_LINK_STATE = "RESET_ADD_LINK_STATE";
+export const SET_LINK_FAVORITE = "SET_LINK_FAVORITE";

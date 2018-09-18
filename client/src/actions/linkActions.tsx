@@ -24,3 +24,13 @@ export function resetAddLinkState() {
     type: types.RESET_ADD_LINK_STATE
   };
 }
+
+export function setLinkFavorite(linkId: string, toFavorite: boolean) {
+  return {
+    type: types.SET_LINK_FAVORITE,
+    payload: {
+      linkId,
+      toFavorite
+    }
+  }
+}
