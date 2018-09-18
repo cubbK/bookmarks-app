@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const findOrCreate = require("mongoose-find-or-create");
 const { oauth2Client } = require("../googleClient");
 
 const infoSchema = new mongoose.Schema({
@@ -20,50 +19,46 @@ const linkSchema = new mongoose.Schema({
 const userSchema = new mongoose.Schema({
   googleId: {
     type: String,
-    required: true
   },
   googleRefreshToken: {
     type: String,
-    required: true
   },
   links: [linkSchema]
 });
-userSchema.plugin(findOrCreate);
 
 const User = mongoose.model("User", userSchema);
 exports.User = User;
 
 exports.setUserField = (googleId, field, value) => {
   const fieldsToUpdate = { [field]: value };
-  return User.update({ googleId }, fieldsToUpdate, function(err, raw) {
+  return User.updateOne({ googleId }, fieldsToUpdate, function(err, raw) {
     if (err) return err;
   }).exec();
 };
 
 // Every google account has a unique id which is sub field in decoded token
-exports.findOrCreateByGoogleId = googleId => {
-  return new Promise((resolve, reject) => {
-    User.findOrCreate(
-      { googleId: googleId },
-      {
-        googleId: googleId,
-        googleAccessToken: null,
-        links: []
-      },
-      (err, result) => {
-        // my new or existing model is loaded as result
-        if (err) {
-          reject(err);
-        }
-        resolve(result);
-      }
-    );
-  });
+exports.findOrCreateByGoogleId = async googleId => {
+  const user = await User.findOne({ googleId }).exec();
+
+  if (user === null) {
+    const newUser = await new User({
+      googleId: googleId,
+      googleRefreshToken: "",
+      links: []
+    }).save();
+
+    console.log("newUser", newUser);
+    return newUser;
+  }
+
+  return user;
 };
 
 exports.getUserByAccessToken = async userId => {
   const user = await User.findOne({ _id: userId }).exec();
   const refreshToken = user.googleRefreshToken;
+  console.log("first user");
+  console.log(user);
 
   // Required shape for google auth client
   const tokens = {
@@ -78,7 +73,8 @@ exports.getUserByAccessToken = async userId => {
     const googleId = tokenInfo.sub;
 
     const userByGoogleId = await User.findOne({ googleId }).exec();
-
+    console.log("user");
+    console.log(userByGoogleId);
     return {
       links: userByGoogleId.links
     };
@@ -87,13 +83,12 @@ exports.getUserByAccessToken = async userId => {
     return err;
   }
 
-  console.log(123);
-
   // const tokenInfo = await oAuth2client.getTokenInfo('my-access-token');
 };
 
 const getPageInfo = require("../helpers/getPageinfo");
 const getGroupNameFromLink = require("../helpers/getGroupNameFromLink");
+
 exports.addLink = async (userId, link) => {
   const info = await getPageInfo(link);
   const groupName = getGroupNameFromLink(link);
