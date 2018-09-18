@@ -47,7 +47,6 @@ exports.findOrCreateByGoogleId = async googleId => {
       links: []
     }).save();
 
-    console.log("newUser", newUser);
     return newUser;
   }
 
@@ -57,8 +56,6 @@ exports.findOrCreateByGoogleId = async googleId => {
 exports.getUserByAccessToken = async userId => {
   const user = await User.findOne({ _id: userId }).exec();
   const refreshToken = user.googleRefreshToken;
-  console.log("first user");
-  console.log(user);
 
   // Required shape for google auth client
   const tokens = {
@@ -73,8 +70,7 @@ exports.getUserByAccessToken = async userId => {
     const googleId = tokenInfo.sub;
 
     const userByGoogleId = await User.findOne({ googleId }).exec();
-    console.log("user");
-    console.log(userByGoogleId);
+
     return {
       links: userByGoogleId.links
     };
