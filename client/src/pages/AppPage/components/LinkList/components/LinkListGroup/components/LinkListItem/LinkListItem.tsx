@@ -11,9 +11,9 @@ import Avatar from "@material-ui/core/Avatar";
 import { Link as LinkIcon, Title as TitleIcon } from "@material-ui/icons";
 import Divider from "@material-ui/core/Divider";
 
+import Modal from "components/Modal/Modal";
+
 import styled from "styled-components";
-import { desaturate } from "polished";
-import ButtonCustomColor from "components/ButtonCustomColor/ButtonCustomColor";
 
 import { ILink } from "reducers/userDataReducer";
 interface IProps {
@@ -108,6 +108,13 @@ class LinkListItem extends React.Component<IProps, IState> {
               />
             </ListItem>
             <ButtonsContainer>
+              <Modal
+                title="Do You Really Want to Delete This Link?"
+                isOpen={true}
+                okText="Yes"
+                cancelText="No"
+                description="This action is irreversible."
+              />
               <Button variant="outlined" color="secondary">
                 Delete
               </Button>
