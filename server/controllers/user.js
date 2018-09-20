@@ -48,9 +48,9 @@ router.post("/setLinkFavorite", async (ctx, next) => {
     const userId = userJWTDecoded.userId;
 
     const linkId = ctx.request.body.linkId;
-    const isFavorite = ctx.request.body.isFavorite;
+    const toFavorite = ctx.request.body.toFavorite;
 
-    console.log("model update setLinkFavorite")
+    User.setLinkFavorite(userId, linkId, toFavorite);
 
     ctx.response.body = ctx.request.body
 

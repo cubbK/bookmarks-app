@@ -19,10 +19,10 @@ const linkSchema = new mongoose.Schema({
 
 const userSchema = new mongoose.Schema({
   googleId: {
-    type: String,
+    type: String
   },
   googleRefreshToken: {
-    type: String,
+    type: String
   },
   links: [linkSchema]
 });
@@ -97,4 +97,12 @@ exports.addLink = async (userId, link) => {
     },
     { new: true }
   ).exec();
+};
+
+exports.setLinkFavorite = async (userId, linkId, favoriteState) => {
+  //TODO
+  const user = await User.updateOne(
+    { _id: userId, "links._id": linkId },
+    { $set: { "links.$.isFavorite": favoriteState } }
+    ).exec();
 };
