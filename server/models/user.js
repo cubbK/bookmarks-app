@@ -105,4 +105,5 @@ exports.setLinkFavorite = async (userId, linkId, favoriteState) => {
     { _id: userId, "links._id": linkId },
     { $set: { "links.$.isFavorite": favoriteState } }
     ).exec();
+    return user
 };
