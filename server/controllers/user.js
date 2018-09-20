@@ -50,7 +50,7 @@ router.post("/setLinkFavorite", async (ctx, next) => {
     const linkId = ctx.request.body.linkId;
     const toFavorite = ctx.request.body.toFavorite;
 
-    if (!userId || !linkId || !toFavorite) {
+    if (!userId || !linkId || toFavorite === null || toFavorite === undefined) {
       ctx.throw(400, "Not all parameters are set");
     }
 
