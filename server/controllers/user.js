@@ -56,12 +56,33 @@ router.post("/setLinkFavorite", async (ctx, next) => {
 
     User.setLinkFavorite(userId, linkId, toFavorite);
 
-    ctx.response.body = ctx.request.body
+    ctx.response.body = ctx.request.body;
+  } catch (err) {
+    console.log(err);
+    ctx.throw(400, err.status);
+  }
+});
+
+router.post("/deleteLink", async (ctx, next) => {
+  try {
+    const userJWTDecoded = jwt.decode(ctx.request.headers["jwt-string"]);
+
+    const userId = userJWTDecoded.userId;
+    const linkId = ctx.request.body.linkId;
+    if (!userId || !linkId) {
+      ctx.throw(400, "Not all parameters are set");
+    }
+    const user = User.deleteLink(userId, linkId);
+    ctx.response.body = {
+      removedLink: linkId
+    };
 
   } catch (err) {
     console.log(err);
     ctx.throw(400, err.status);
   }
-})
+
+  return next();
+});
 
 module.exports = router;

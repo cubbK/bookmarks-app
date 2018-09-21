@@ -46,3 +46,23 @@ export function setLinkFavorite(
     )
   };
 }
+
+export function deleteLink(
+  linkId: string,
+  userJWT: string
+) {
+  return {
+    type: types.DELETE_LINK,
+    payload: axios.post(
+      `${API_URL}user/deleteLink`,
+      {
+        linkId
+      },
+      {
+        headers: {
+          "jwt-string": userJWT
+        }
+      }
+    )
+  }
+}

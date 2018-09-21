@@ -100,10 +100,20 @@ exports.addLink = async (userId, link) => {
 };
 
 exports.setLinkFavorite = async (userId, linkId, favoriteState) => {
-  //TODO
   const user = await User.updateOne(
     { _id: userId, "links._id": linkId },
     { $set: { "links.$.isFavorite": favoriteState } }
     ).exec();
     return user
 };
+
+exports.deleteLink = async (userId, linkId) => {
+  console.log(userId)
+  console.log(linkId)
+
+  const user = await User.findByIdAndUpdate(
+    userId,
+    { $pull: { "links" : { "_id": linkId } } }
+    ).exec();
+    return user
+}

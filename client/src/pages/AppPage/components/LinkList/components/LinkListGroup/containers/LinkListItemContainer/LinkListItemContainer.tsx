@@ -1,6 +1,6 @@
 import * as React from "react";
 import LinkListItem from "../../components/LinkListItem/LinkListItem";
-import { setLinkFavorite } from "actions/linkActions";
+import { setLinkFavorite, deleteLink } from "actions/linkActions";
 import { connect } from "react-redux";
 import { IStoreState } from "reducers";
 
@@ -13,6 +13,7 @@ interface IProps {
     toFavorite: boolean,
     userJWT: string
   ) => void;
+  deleteLink: (linkId: string, userJWT: string) => void;
 }
 
 interface IState {
@@ -48,9 +49,10 @@ class LinkListItemContainer extends React.Component<IProps, IState> {
   };
 
   deleteLink = () => {
-    this.toggleDeleteModalOpenState()
-    console.log("delete link")
-  }
+    this.toggleDeleteModalOpenState();
+    this.props.deleteLink(this.props.link._id, this.props.userJWT)
+    console.log("delete link");
+  };
 
   render() {
     return (
@@ -71,5 +73,5 @@ export default connect(
   (state: IStoreState) => ({
     userJWT: state.userJWT
   }),
-  { setLinkFavorite }
+  { setLinkFavorite, deleteLink }
 )(LinkListItemContainer);
