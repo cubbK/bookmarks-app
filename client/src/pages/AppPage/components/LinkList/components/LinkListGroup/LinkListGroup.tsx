@@ -39,7 +39,7 @@ const WrappedListItemText = styled<IWrappedListItemText, "div">("div")`
 `;
 
 const LinksList = styled(List)`
-  border-left: 5px solid ${props => props.theme.mainColor};
+  border-left: 2px solid ${props => props.theme.mainColor};
 `;
 
 class LinkListGroup extends React.Component<IProps, IState> {

@@ -35,7 +35,7 @@ const TitleLeftIndicator = (props: { isOpen: boolean }) => (
       }}
     >
       {(styles: { width: string }) => (
-        <Line width="15px" height="5px" style={{ width: styles.width }} />
+        <Line width="15px" height="2px" style={{ width: styles.width }} />
       )}
     </Spring>
     {/* vertical div */}
@@ -48,7 +48,7 @@ const TitleLeftIndicator = (props: { isOpen: boolean }) => (
       }}
     >
       {(styles: { height: string }) => (
-        <Line width="5px" height="55%" style={{ height: styles.height }} />
+        <Line width="2px" height="55%" style={{ height: styles.height }} />
       )}
     </Spring>
   </Container>
