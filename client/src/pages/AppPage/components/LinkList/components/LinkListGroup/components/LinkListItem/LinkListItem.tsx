@@ -11,8 +11,7 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 
 import {
   Link as LinkIcon,
-  Title as TitleIcon,
-  Star as StarIcon
+  Title as TitleIcon
 } from "@material-ui/icons";
 import Divider from "@material-ui/core/Divider";
 
@@ -56,9 +55,13 @@ const ButtonsContainer = styled(ListItem)`
   }
 `;
 
-const StarIconStyled = styled(StarIcon)`
+const StarIconStyled = styled.div`
   && {
     margin-right: 10px;
+    background-color: ${props => props.theme.mainColor};
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
   }
 `;
 
