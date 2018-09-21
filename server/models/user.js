@@ -110,6 +110,6 @@ exports.setLinkFavorite = async (userId, linkId, favoriteState) => {
 exports.deleteLink = async (userId, linkId) => {
   const user = await User.findByIdAndUpdate(userId, {
     $pull: { links: { _id: linkId } }
-  })
+  });
   return user;
 };

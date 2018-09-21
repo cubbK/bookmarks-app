@@ -72,13 +72,12 @@ router.post("/deleteLink", async (ctx, next) => {
     if (!userId || !linkId) {
       ctx.throw(400, "Not all parameters are set");
     }
-    
+
     await User.deleteLink(userId, linkId);
 
     ctx.response.body = {
       removedLink: linkId
     };
-
   } catch (err) {
     ctx.throw(400, err.status);
   }
