@@ -16,14 +16,6 @@ import Modal from "components/Modal/Modal";
 import styled from "styled-components";
 
 import { ILink } from "reducers/userDataReducer";
-interface IProps {
-  link: ILink;
-  setFavorite: (toFavorite: boolean) => () => void;
-}
-
-interface IState {
-  open: boolean;
-}
 
 const TitleLink = styled.a`
   color: inherit;
@@ -59,31 +51,35 @@ const ButtonsContainer = styled(ListItem)`
   }
 `;
 
-class LinkListItem extends React.Component<IProps, IState> {
-  state = {
-    open: false
-  };
+interface IProps {
+  link: ILink;
+  setFavorite: (toFavorite: boolean) => () => void;
+  open: boolean;
+  toggleOpenState: () => void;
+  deleteModalOpen: boolean;
+  toggleDeleteModalOpen: () => void;
+  deleteLink: () => void;
+}
 
-  toggleOpenState = () => {
-    this.setState({
-      open: !this.state.open
-    });
-  };
-
+class LinkListItem extends React.Component<IProps> {
   render() {
     const link = this.props.link;
     return (
       <React.Fragment>
-        <ListItem key={link._id} onClick={this.toggleOpenState} button={true}>
+        <ListItem
+          key={link._id}
+          onClick={this.props.toggleOpenState}
+          button={true}
+        >
           <ListItemText>
-            <WrappedListItemText isOpen={this.state.open}>
+            <WrappedListItemText isOpen={this.props.open}>
               <TitleLink href={link.url} target="_blank">
                 {link.info.title || link.url}
               </TitleLink>
             </WrappedListItemText>
           </ListItemText>
         </ListItem>
-        <Collapse in={this.state.open} timeout="auto" unmountOnExit={true}>
+        <Collapse in={this.props.open} timeout="auto" unmountOnExit={true}>
           <List dense={true}>
             <ListItem>
               <AvatarStyled>
@@ -110,12 +106,18 @@ class LinkListItem extends React.Component<IProps, IState> {
             <ButtonsContainer>
               <Modal
                 title="Do You Really Want to Delete This Link?"
-                isOpen={true}
+                isOpen={this.props.deleteModalOpen}
                 okText="Yes"
                 cancelText="No"
                 description="This action is irreversible."
+                onSuccess={this.props.deleteLink}
+                onClose={this.props.toggleDeleteModalOpen}
               />
-              <Button variant="outlined" color="secondary">
+              <Button
+                variant="outlined"
+                color="secondary"
+                onClick={this.props.toggleDeleteModalOpen}
+              >
                 Delete
               </Button>
               {this.props.link.isFavorite ? (
