@@ -62,5 +62,11 @@ export default (state = defaultState, action) =>
           }
           return link;
         });
+        break;
+      case types.DELETE_LINK + "_PENDING": 
+        break;
+      case types.DELETE_LINK + "_FULFILLED":
+        draft.links = draft.links.filter(link => link._id !== action.payload.data.removedLink)
+        break;
     }
   });
