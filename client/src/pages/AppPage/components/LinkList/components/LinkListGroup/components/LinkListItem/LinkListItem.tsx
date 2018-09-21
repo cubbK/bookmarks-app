@@ -7,8 +7,13 @@ import ListItemText from "@material-ui/core/ListItemText";
 import Collapse from "@material-ui/core/Collapse";
 import Button from "@material-ui/core/Button";
 import Avatar from "@material-ui/core/Avatar";
+import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 
-import { Link as LinkIcon, Title as TitleIcon } from "@material-ui/icons";
+import {
+  Link as LinkIcon,
+  Title as TitleIcon,
+  Star as StarIcon
+} from "@material-ui/icons";
 import Divider from "@material-ui/core/Divider";
 
 import Modal from "components/Modal/Modal";
@@ -51,6 +56,12 @@ const ButtonsContainer = styled(ListItem)`
   }
 `;
 
+const StarIconStyled = styled(StarIcon)`
+  && {
+    margin-right: 10px;
+  }
+`;
+
 interface IProps {
   link: ILink;
   setFavorite: (toFavorite: boolean) => () => void;
@@ -62,6 +73,14 @@ interface IProps {
 }
 
 class LinkListItem extends React.Component<IProps> {
+  renderStar = () => {
+    if (this.props.link.isFavorite) {
+      return <StarIconStyled  />;
+    } else {
+      return null;
+    }
+  };
+
   render() {
     const link = this.props.link;
     return (
@@ -78,6 +97,9 @@ class LinkListItem extends React.Component<IProps> {
               </TitleLink>
             </WrappedListItemText>
           </ListItemText>
+          <ListItemSecondaryAction>
+            {this.renderStar()}  
+          </ListItemSecondaryAction>
         </ListItem>
         <Collapse in={this.props.open} timeout="auto" unmountOnExit={true}>
           <List dense={true}>
