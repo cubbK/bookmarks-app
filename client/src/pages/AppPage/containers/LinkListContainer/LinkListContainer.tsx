@@ -30,7 +30,7 @@ class LinkListContainer extends React.Component<IProps> {
     } else {
       return (
         <React.Fragment>
-          <LinkList groups={this.props.linksFavorite} />
+          { this.props.linksFavorite.Favorites.length > 0 ? <LinkList groups={this.props.linksFavorite} /> : null }
           <LinkList groups={this.props.linksGrouped} />
         </React.Fragment>
       );
