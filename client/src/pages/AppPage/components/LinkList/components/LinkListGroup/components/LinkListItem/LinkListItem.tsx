@@ -45,6 +45,7 @@ const WrappedListItemText = styled<IWrappedListItemText, "div">("div")`
   text-overflow: ellipsis;
   white-space: nowrap;
   color: ${props => (props.isOpen ? props.theme.secondaryColor : "inherit")};
+  font-size: 0.9rem;
 `;
 
 const ButtonsContainer = styled(ListItem)`
@@ -63,6 +64,12 @@ const StarIconStyled = styled.div`
     height: 10px;
     border-radius: 50%;
   }
+`;
+
+const ListItemTextZoomed = styled(ListItemText)`
+&& {
+  font-size: 0.9rem;
+}
 `;
 
 interface IProps {
@@ -110,7 +117,7 @@ class LinkListItem extends React.Component<IProps> {
               <AvatarStyled>
                 <TitleIcon />
               </AvatarStyled>
-              <ListItemText primary="Full Title" secondary={link.info.title} />
+              <ListItemTextZoomed primary="Full Title" secondary={link.info.title} />
             </ListItem>
             <li>
               <Divider inset={true} />
@@ -119,7 +126,7 @@ class LinkListItem extends React.Component<IProps> {
               <AvatarStyled>
                 <LinkIcon />
               </AvatarStyled>
-              <ListItemText
+              <ListItemTextZoomed
                 primary="Url"
                 secondary={
                   <FullLink href={link.url} target="_blank">
