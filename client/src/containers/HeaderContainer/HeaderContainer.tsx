@@ -8,6 +8,16 @@ interface IProps {
 }
 
 class HeaderContainer extends React.Component<IProps> {
+  state = {
+    drawerOpen: false
+  };
+
+  toggleDrawer = (isOpen: boolean) => () => {
+    this.setState({
+      drawerOpen: isOpen
+    });
+  };
+
   onLogoutClick = () => {
     console.log("logout");
     this.props.setUserJWT(null);
@@ -20,10 +30,21 @@ class HeaderContainer extends React.Component<IProps> {
 
   render() {
     return (
-      <Header
-        onLogoutClick={this.onLogoutClick}
-        onProfileClick={this.onProfileClick}
-      />
+      <Header>
+        <Header.Logo />
+        <Header.FilterField />
+        <Header.DrawerButton onClick={this.toggleDrawer(true)} />
+        <Header.Drawer
+          open={this.state.drawerOpen}
+          onOpen={this.toggleDrawer(true)}
+          onClose={this.toggleDrawer(false)}
+        >
+          <Header.DrawerList
+            onLogoutClick={this.onLogoutClick}
+            onProfileClick={this.onProfileClick}
+          />
+        </Header.Drawer>
+      </Header>
     );
   }
 }
