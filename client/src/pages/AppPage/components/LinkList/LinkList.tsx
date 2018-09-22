@@ -6,9 +6,18 @@ import LinkListGroup from "./components/LinkListGroup/LinkListGroup";
 
 import { ILinksGrouped } from "selectors/getLinksByGroup";
 
+import styled from "styled-components";
+
 interface IProps {
   groups: ILinksGrouped;
 }
+
+const ListWithoutPadding = styled(List)`
+  && {
+    padding-top: 0;
+    padding-bottom: 0;
+  }
+`;
 
 class LinkList extends React.Component<IProps> {
   mapGroups = (): Array<any> => {
@@ -24,9 +33,7 @@ class LinkList extends React.Component<IProps> {
 
   render() {
     return (
-      <div>
-        <List component="nav">{this.mapGroups()}</List>
-      </div>
+        <ListWithoutPadding component="nav">{this.mapGroups()}</ListWithoutPadding>
     );
   }
 }
