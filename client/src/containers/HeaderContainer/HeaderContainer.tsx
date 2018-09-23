@@ -32,7 +32,11 @@ class HeaderContainer extends React.Component<IProps> {
     return (
       <Header>
         <Header.Logo />
-        <Header.FilterField />
+        <Header.FilterField
+          value="123"
+          handleChange={this.onProfileClick}
+          handleCleanField={this.onProfileClick}
+        />
         <Header.DrawerButton onClick={this.toggleDrawer(true)} />
         <Header.Drawer
           open={this.state.drawerOpen}
