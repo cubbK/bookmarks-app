@@ -30,6 +30,8 @@ class HeaderContainer extends React.Component<IProps> {
     });
   };
 
+
+
   onLogoutClick = () => {
     console.log("logout");
     this.props.setUserJWT(null);
@@ -48,7 +50,7 @@ class HeaderContainer extends React.Component<IProps> {
           value="123"
           handleChange={this.onProfileClick}
           handleCleanField={this.onProfileClick}
-          handleBack={this.onProfileClick}
+          handleBack={this.toggleFilterField(false)}
           isOpen={this.state.filterFieldOpen}
         />
         <Header.FilterButton onClick={this.toggleFilterField(true)} />

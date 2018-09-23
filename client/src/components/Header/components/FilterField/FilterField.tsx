@@ -13,11 +13,9 @@ import {
   ArrowBack as ArrowBackIcon
 } from "@material-ui/icons";
 
-import { Spring } from "react-spring";
+import { Spring, config } from "react-spring";
 
 import styled from "styled-components";
-
-
 
 const InputStyled = styled(Input)`
   && {
@@ -65,46 +63,44 @@ interface IProps {
 
 class FilterField extends React.Component<IProps> {
   render() {
-    if (this.props.isOpen) {
-      return (
-        <Spring from={{ left: "100%" }} to={{ left: "0%" }}>
-          {({ left }) => (
-            <AppBarStyled position="sticky" left={left}>
-              <Toolbar>
-                <InputStyled
-                  id="filter"
-                  type="text"
-                  value={this.props.value}
-                  onChange={this.props.handleChange}
-                  endAdornment={
-                    <InputAdornment position="end">
-                      <IconButtonStyled
-                        aria-label="reset filter"
-                        onClick={this.props.handleCleanField}
-                      >
-                        {this.props.value.length > 0 ? <ClearIcon /> : null}
-                      </IconButtonStyled>
-                    </InputAdornment>
-                  }
-                  startAdornment={
-                    <InputAdornment position="start">
-                      <IconButtonStyled
-                        aria-label="back"
-                        onClick={this.props.handleBack}
-                      >
-                        <ArrowBackIcon />
-                      </IconButtonStyled>
-                    </InputAdornment>
-                  }
-                />
-              </Toolbar>
-            </AppBarStyled>
-          )}
-        </Spring>
-      );
-    } else {
-      return null;
-    }
+    const initialLeft = this.props.isOpen ? "100%" : "0%";
+    const finalLeft = this.props.isOpen ? "0%" : "100%";
+    return (
+      <Spring from={{ left: initialLeft }} to={{ left: finalLeft }}  config={config.stiff}>
+        {({ left }) => (
+          <AppBarStyled position="sticky" left={left}>
+            <Toolbar>
+              <InputStyled
+                id="filter"
+                type="text"
+                value={this.props.value}
+                onChange={this.props.handleChange}
+                endAdornment={
+                  <InputAdornment position="end">
+                    <IconButtonStyled
+                      aria-label="reset filter"
+                      onClick={this.props.handleCleanField}
+                    >
+                      {this.props.value.length > 0 ? <ClearIcon /> : null}
+                    </IconButtonStyled>
+                  </InputAdornment>
+                }
+                startAdornment={
+                  <InputAdornment position="start">
+                    <IconButtonStyled
+                      aria-label="back"
+                      onClick={this.props.handleBack}
+                    >
+                      <ArrowBackIcon />
+                    </IconButtonStyled>
+                  </InputAdornment>
+                }
+              />
+            </Toolbar>
+          </AppBarStyled>
+        )}
+      </Spring>
+    );
   }
 }
 

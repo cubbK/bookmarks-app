@@ -11,8 +11,9 @@ import Drawer from "./components/Drawer/Drawer";
 
 import styled from "styled-components";
 
-
-const AppBarStyled = styled(AppBar)``;
+const AppBarStyled = styled(AppBar)`
+  overflow: hidden;
+`;
 
 const ToolbarStyled = styled(Toolbar)`
   && {
@@ -24,16 +25,11 @@ const ToolbarStyled = styled(Toolbar)`
   }
 `;
 
+interface IProps {}
 
-
-interface IProps {
-}
-
-interface IState {
-}
+interface IState {}
 
 class Header extends React.Component<IProps, IState> {
-
   static Logo = Logo;
   static FilterField = FilterField;
   static DrawerButton = DrawerButton;
@@ -45,15 +41,11 @@ class Header extends React.Component<IProps, IState> {
     return (
       <header>
         <AppBarStyled position="sticky">
-          <ToolbarStyled>
-            {this.props.children}
-          </ToolbarStyled>
+          <ToolbarStyled>{this.props.children}</ToolbarStyled>
         </AppBarStyled>
       </header>
     );
   }
-
-  
 }
 
 export default Header;
