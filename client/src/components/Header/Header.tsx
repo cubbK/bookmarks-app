@@ -2,11 +2,9 @@ import * as React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 
-import SwipeableDrawer from "@material-ui/core/SwipeableDrawer";
-
-
 import DrawerList from "./components/DrawerList/DrawerList";
 import FilterField from "./components/FilterField/FilterField";
+import FilterButton from "./components/FilterButton/FilterButton";
 import DrawerButton from "./components/DrawerButton/DrawerButton";
 import Logo from "./components/Logo/Logo";
 import Drawer from "./components/Drawer/Drawer";
@@ -19,7 +17,10 @@ const AppBarStyled = styled(AppBar)``;
 const ToolbarStyled = styled(Toolbar)`
   && {
     display: grid;
-    grid-template-columns: 70px 1fr 50px;
+    justify-items: center;
+    grid-template-columns: 50px auto 50px 50px;
+    grid-template-rows: auto;
+    grid-template-areas: "logo . filter menu";
   }
 `;
 
@@ -29,7 +30,6 @@ interface IProps {
 }
 
 interface IState {
-  drawerOpen: boolean;
 }
 
 class Header extends React.Component<IProps, IState> {
@@ -39,6 +39,7 @@ class Header extends React.Component<IProps, IState> {
   static DrawerButton = DrawerButton;
   static Drawer = Drawer;
   static DrawerList = DrawerList;
+  static FilterButton = FilterButton;
 
   public render() {
     return (

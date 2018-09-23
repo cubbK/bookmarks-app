@@ -7,6 +7,7 @@ import Button from "@material-ui/core/IconButton";
 const WhiteButton = styled(Button)`
   && {
     color: ${whiteColor};
+    grid-area: menu;
   }
 `;
 

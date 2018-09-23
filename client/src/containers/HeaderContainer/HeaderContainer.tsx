@@ -7,14 +7,26 @@ interface IProps {
   setUserJWT: (token: string | null) => void;
 }
 
+interface IState {
+  drawerOpen: boolean;
+  filterFieldOpen: boolean;
+}
+
 class HeaderContainer extends React.Component<IProps> {
   state = {
-    drawerOpen: false
+    drawerOpen: false,
+    filterFieldOpen: false
   };
 
   toggleDrawer = (isOpen: boolean) => () => {
     this.setState({
       drawerOpen: isOpen
+    });
+  };
+
+  toggleFilterField = (isOpen: boolean) => () => {
+    this.setState({
+      filterFieldOpen: isOpen
     });
   };
 
@@ -36,7 +48,9 @@ class HeaderContainer extends React.Component<IProps> {
           value="123"
           handleChange={this.onProfileClick}
           handleCleanField={this.onProfileClick}
+          isOpen={this.state.filterFieldOpen}
         />
+        <Header.FilterButton onClick={this.toggleFilterField(true)} />
         <Header.DrawerButton onClick={this.toggleDrawer(true)} />
         <Header.Drawer
           open={this.state.drawerOpen}
