@@ -48,7 +48,7 @@ interface IAppBarStyled {
 const AppBarStyled = styled<IAppBarStyled, any>(AppBar)`
   && {
     position: absolute;
-    left: ${props => props.left};
+    left: 100%;
     top: 0;
   }
 `;
@@ -68,7 +68,7 @@ class FilterField extends React.Component<IProps> {
     return (
       <Spring from={{ left: initialLeft }} to={{ left: finalLeft }}  config={config.stiff}>
         {({ left }) => (
-          <AppBarStyled position="sticky" left={left}>
+          <AppBarStyled position="sticky" style={{left: left}}>
             <Toolbar>
               <InputStyled
                 id="filter"
