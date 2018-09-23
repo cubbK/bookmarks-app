@@ -48,6 +48,7 @@ class HeaderContainer extends React.Component<IProps> {
           value="123"
           handleChange={this.onProfileClick}
           handleCleanField={this.onProfileClick}
+          handleBack={this.onProfileClick}
           isOpen={this.state.filterFieldOpen}
         />
         <Header.FilterButton onClick={this.toggleFilterField(true)} />
