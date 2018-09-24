@@ -4,7 +4,7 @@ import List from "@material-ui/core/List";
 
 import LinkListGroup from "./components/LinkListGroup/LinkListGroup";
 
-import { ILinksGrouped } from "selectors/getLinksByGroup";
+import { ILinksGrouped } from "selectors/links";
 
 import styled from "styled-components";
 

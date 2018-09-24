@@ -2,9 +2,14 @@ import * as React from "react";
 import Header from "components/Header/Header";
 import { connect } from "react-redux";
 import { setUserJWT } from "actions/authActions";
+import { setFilterString } from "actions/filterActions";
+
+import { IStoreState } from "reducers";
 
 interface IProps {
   setUserJWT: (token: string | null) => void;
+  setFilterString: (filterString: string) => void;
+  filterString: string;
 }
 
 interface IState {
@@ -12,7 +17,7 @@ interface IState {
   filterFieldOpen: boolean;
 }
 
-class HeaderContainer extends React.Component<IProps> {
+class HeaderContainer extends React.Component<IProps, IState> {
   state = {
     drawerOpen: false,
     filterFieldOpen: false
@@ -28,9 +33,18 @@ class HeaderContainer extends React.Component<IProps> {
     this.setState({
       filterFieldOpen: isOpen
     });
+    this.props.setFilterString("");
   };
 
+  handleFilterFieldChange = event => {
+    const value = event.target.value;
+    console.log(value);
+    this.props.setFilterString(value);
+  };
 
+  handleFilterClean = () => {
+    this.props.setFilterString("");
+  };
 
   onLogoutClick = () => {
     console.log("logout");
@@ -47,9 +61,9 @@ class HeaderContainer extends React.Component<IProps> {
       <Header>
         <Header.Logo />
         <Header.FilterField
-          value="123"
-          handleChange={this.onProfileClick}
-          handleCleanField={this.onProfileClick}
+          value={this.props.filterString}
+          handleChange={this.handleFilterFieldChange}
+          handleCleanField={this.handleFilterClean}
           handleBack={this.toggleFilterField(false)}
           isOpen={this.state.filterFieldOpen}
         />
@@ -71,6 +85,8 @@ class HeaderContainer extends React.Component<IProps> {
 }
 
 export default connect(
-  null,
-  { setUserJWT }
+  (state: IStoreState) => ({
+    filterString: state.filterString
+  }),
+  { setUserJWT, setFilterString }
 )(HeaderContainer);

@@ -7,3 +7,6 @@ export const ADD_LINK = "ADD_LINK";
 export const RESET_ADD_LINK_STATE = "RESET_ADD_LINK_STATE";
 export const SET_LINK_FAVORITE = "SET_LINK_FAVORITE";
 export const DELETE_LINK = "DELETE_LINK";
+
+// search
+export const SET_FILTER_STRING = "SET_FILTER_STRING";

@@ -1,6 +1,5 @@
 import produce from "immer";
 import * as types from "constants/actionTypes";
-import { linkSync } from "fs";
 
 export interface ILink {
   _id: string;

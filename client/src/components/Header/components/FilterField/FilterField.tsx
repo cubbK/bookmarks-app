@@ -55,7 +55,7 @@ const AppBarStyled = styled<IAppBarStyled, any>(AppBar)`
 
 interface IProps {
   value: string;
-  handleChange: () => void;
+  handleChange: (event: any) => void;
   handleCleanField: () => void;
   handleBack: () => void;
   isOpen: boolean;
