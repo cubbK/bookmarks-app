@@ -14,12 +14,13 @@ const IconButtonStyled = styled(IconButton)`
 
 interface IProps {
   onClick: () => void;
+  style?: object;
 }
 
 class FilterButton extends React.Component<IProps> {
   render() {
     return (
-      <IconButtonStyled onClick={this.props.onClick}>
+      <IconButtonStyled onClick={this.props.onClick} style={this.props.style}>
         <SearchIcon />
       </IconButtonStyled>
     );

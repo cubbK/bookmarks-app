@@ -13,12 +13,13 @@ const WhiteButton = styled(Button)`
 
 interface IProps {
   onClick: () => void;
+  style?: object;
 }
 
 class DrawerButton extends React.Component<IProps> {
   render() {
     return (
-      <WhiteButton aria-haspopup="true" onClick={this.props.onClick}>
+      <WhiteButton aria-haspopup="true" onClick={this.props.onClick} style={this.props.style}>
         <MenuIcon />
       </WhiteButton>
     );

@@ -1,9 +1,13 @@
 import * as React from "react";
 
-class Logo extends React.Component {
+interface IProps {
+  style? : object;
+}
+
+class Logo extends React.Component<IProps> {
   render() {
     return (
-      <div>
+      <div style={this.props.style}>
         Logo1
       </div>
     )

@@ -1,5 +1,6 @@
 import * as React from "react";
 import Header from "components/Header/Header";
+import { Spring, config } from "react-spring";
 import { connect } from "react-redux";
 import { setUserJWT } from "actions/authActions";
 import { setFilterString } from "actions/filterActions";
@@ -13,25 +14,25 @@ interface IProps {
 }
 
 interface IState {
-  drawerOpen: boolean;
-  filterFieldOpen: boolean;
+  isDrawerOpen: boolean;
+  isFilterFieldOpen: boolean;
 }
 
 class HeaderContainer extends React.Component<IProps, IState> {
   state = {
-    drawerOpen: false,
-    filterFieldOpen: false
+    isDrawerOpen: false,
+    isFilterFieldOpen: false
   };
 
   toggleDrawer = (isOpen: boolean) => () => {
     this.setState({
-      drawerOpen: isOpen
+      isDrawerOpen: isOpen
     });
   };
 
   toggleFilterField = (isOpen: boolean) => () => {
     this.setState({
-      filterFieldOpen: isOpen
+      isFilterFieldOpen: isOpen
     });
     this.props.setFilterString("");
   };
@@ -57,29 +58,51 @@ class HeaderContainer extends React.Component<IProps, IState> {
   };
 
   render() {
+    const initialFilterFieldOpacity = this.state.isFilterFieldOpen ? 0 : 1;
+    const finalFilterFieldOpacity = this.state.isFilterFieldOpen ? 1 : 0;
     return (
-      <Header>
-        <Header.Logo />
-        <Header.FilterField
-          value={this.props.filterString}
-          handleChange={this.handleFilterFieldChange}
-          handleCleanField={this.handleFilterClean}
-          handleBack={this.toggleFilterField(false)}
-          isOpen={this.state.filterFieldOpen}
-        />
-        <Header.FilterButton onClick={this.toggleFilterField(true)} />
-        <Header.DrawerButton onClick={this.toggleDrawer(true)} />
-        <Header.Drawer
-          open={this.state.drawerOpen}
-          onOpen={this.toggleDrawer(true)}
-          onClose={this.toggleDrawer(false)}
-        >
-          <Header.DrawerList
-            onLogoutClick={this.onLogoutClick}
-            onProfileClick={this.onProfileClick}
-          />
-        </Header.Drawer>
-      </Header>
+      <Spring
+        from={{
+          filterFieldOpacity: initialFilterFieldOpacity,
+          restOpacity: finalFilterFieldOpacity
+        }}
+        to={{
+          filterFieldOpacity: finalFilterFieldOpacity,
+          restOpacity: initialFilterFieldOpacity
+        }}
+        config={config.stiff}
+      >
+        {({ filterFieldOpacity, restOpacity }) => (
+          <Header>
+            <Header.Logo style={{ opacity: restOpacity, visibility: restOpacity === 0 ? "hidden" : "visible"}} />
+            <Header.FilterField
+              value={this.props.filterString}
+              handleChange={this.handleFilterFieldChange}
+              handleCleanField={this.handleFilterClean}
+              handleBack={this.toggleFilterField(false)}
+              style={{ opacity: filterFieldOpacity }}
+            />
+            <Header.FilterButton
+              onClick={this.toggleFilterField(true)}
+              style={{ opacity: restOpacity, visibility: restOpacity === 0 ? "hidden" : "visible" }}
+            />
+            <Header.DrawerButton
+              onClick={this.toggleDrawer(true)}
+              style={{ opacity: restOpacity, visibility: restOpacity === 0 ? "hidden" : "visible" }}
+            />
+            <Header.Drawer
+              open={this.state.isDrawerOpen}
+              onOpen={this.toggleDrawer(true)}
+              onClose={this.toggleDrawer(false)}
+            >
+              <Header.DrawerList
+                onLogoutClick={this.onLogoutClick}
+                onProfileClick={this.onProfileClick}
+              />
+            </Header.Drawer>
+          </Header>
+        )}
+      </Spring>
     );
   }
 }
