@@ -70,7 +70,7 @@ class HeaderContainer extends React.Component<IProps, IState> {
           filterFieldOpacity: finalFilterFieldOpacity,
           restOpacity: initialFilterFieldOpacity
         }}
-        config={config.stiff}
+        config={{...config.stiff, tension: 500}}
       >
         {({ filterFieldOpacity, restOpacity }) => (
           <Header>
