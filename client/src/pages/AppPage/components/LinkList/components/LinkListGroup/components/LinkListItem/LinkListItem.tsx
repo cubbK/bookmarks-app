@@ -58,7 +58,8 @@ const ButtonsContainer = styled(ListItem)`
 
 const StarIconStyled = styled.div`
   && {
-    margin-right: 10px;
+    cursor: pointer;
+    margin-right: 19px;
     background-color: ${props => props.theme.mainColor};
     width: 10px;
     height: 10px;
@@ -85,7 +86,7 @@ interface IProps {
 class LinkListItem extends React.Component<IProps> {
   renderStar = () => {
     if (this.props.link.isFavorite) {
-      return <StarIconStyled  />;
+      return <StarIconStyled onClick={this.props.toggleOpenState} />;
     } else {
       return null;
     }
@@ -108,7 +109,7 @@ class LinkListItem extends React.Component<IProps> {
             </WrappedListItemText>
           </ListItemText>
           <ListItemSecondaryAction>
-            {this.renderStar()}  
+            {this.renderStar()}
           </ListItemSecondaryAction>
         </ListItem>
         <Collapse in={this.props.open} timeout="auto" unmountOnExit={true}>
