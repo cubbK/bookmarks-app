@@ -1,13 +1,19 @@
 import * as React from "react";
 import Introduction from "./components/Introduction/Introduction";
-import LoginBtnGoogle from "containers/LoginBtnGoogle/LoginBtnGoogle";
+import Features from './components/Features/Features'
+import styled from 'styled-components';
+
+const Body = styled.div`
+  margin: 13px 16px 0;
+  color: ${props => props.theme.mainColor};
+`;
 
 const Homepage = () => (
-  <React.Fragment>
+  <Body>
     <Introduction />
-    <LoginBtnGoogle />
+    <Features />
     asd
-  </React.Fragment>
+  </Body> 
 );
 
 export default Homepage;

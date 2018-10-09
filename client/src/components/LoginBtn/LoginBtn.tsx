@@ -1,22 +1,18 @@
 import * as React from "react";
-import Button from "@material-ui/core/Button";
+import styled from "styled-components"
+const googleBtnImage = require("./img/google-button.png");
+
+const LinkImage = styled.img`
+  cursor: pointer;
+  max-width: 230px;
+`
 
 interface IProps {
-  color?: "inherit" | "primary" | "secondary" | "default" | undefined;
-  name?: string;
-  children?: any;
   onClick?: () => void;
 }
 
 const LoginBtn: React.SFC<IProps> = props => (
-  <Button variant="contained" color={props.color} size="large" {...props}>
-    {props.children ? props.children : `Log In With ${props.name}`}
-  </Button>
+  <LinkImage src={googleBtnImage} alt="Log In With Google" onClick={props.onClick}/>
 );
-
-LoginBtn.defaultProps = {
-  color: "secondary",
-  name: "Google"
-};
 
 export default LoginBtn;

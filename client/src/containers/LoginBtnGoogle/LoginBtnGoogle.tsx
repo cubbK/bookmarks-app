@@ -17,7 +17,7 @@ const googleUrl = googleUrlWithSpaces.replace(/\s/g, "");
 
 class LoginBtnGoogle extends React.Component {
   public render() {
-    return <LoginBtn name="Google" onClick={this.setHref} />;
+    return <LoginBtn onClick={this.setHref} />;
   }
 
   private setHref = () => (document.location.href = googleUrl);

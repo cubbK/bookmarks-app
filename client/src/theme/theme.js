@@ -7,6 +7,7 @@ export const whiteColor = '#eff1ed'
 
 export const muiTheme = createMuiTheme({
   palette: {
+    type: "dark",
     primary: {
       main: mainColor,
     },
@@ -15,8 +16,25 @@ export const muiTheme = createMuiTheme({
     },
     error: {
       main: errorColor
+    },
+    background: {
+      default: mainColor
     }
   },
+  typography: {
+    display1: {
+      color: whiteColor
+    },
+    display2: {
+      color: whiteColor
+    },
+    display3: {
+      color: whiteColor
+    },
+    display4: {
+      color: whiteColor
+    },
+  }
 })
 
 export const styledTheme = {
