@@ -26,7 +26,7 @@ const Introduction = () => (
     <CatchPhrase variant="headline">
       A place to store and group your links in just one click.
     </CatchPhrase>
-    <DevicesImage src={devicesImage} alt=""/> 
+    <DevicesImage src={devicesImage} alt="" />
     <LoginBtnGoogle />
   </Container>
 );
