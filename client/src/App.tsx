@@ -5,6 +5,8 @@ import { compose } from "redux";
 import Homepage from "pages/Homepage/Homepage";
 import AppPage from "pages/AppPage/AppPage";
 import GoogleRedirectPage from "pages/GoogleRedirectPage/GoogleRedirectPage";
+import Footer from "components/Footer/Footer";
+
 import { IStoreState } from "reducers";
 
 interface IProps {
@@ -28,6 +30,7 @@ const App = (props: IProps) => (
       />
       <Route component={NoMatch} />
     </Switch>
+    <Footer />
   </React.Fragment>
 );
 

@@ -2,6 +2,7 @@ import * as React from "react";
 import Introduction from "./components/Introduction/Introduction";
 import Features from "./components/Features/Features";
 import styled from "styled-components";
+
 import { Typography } from "@material-ui/core";
 
 const Body = styled.div`
@@ -9,6 +10,7 @@ const Body = styled.div`
   color: ${props => props.theme.mainColor};
   display: grid;
   row-gap: 55px;
+  margin-bottom: 60px;
 `;
 
 const TextBlockContainer = styled.div`
@@ -32,7 +34,7 @@ const TextBlockItem = styled(Typography)`
     font-size: 14px;
     margin-top: 15px;
   }
-`
+`;
 
 const Homepage = () => (
   <Body>
@@ -51,6 +53,7 @@ const Homepage = () => (
         </TextBlockItem>
       </TextBlockDesc>
     </TextBlockContainer>
+    
   </Body>
 );
 

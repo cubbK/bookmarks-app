@@ -1,15 +1,16 @@
-import { createMuiTheme } from '@material-ui/core/styles';
+import { createMuiTheme } from "@material-ui/core/styles";
 
-export const mainColor = '#121316'
-export const secondaryColor = '#f22b29'
-export const errorColor = '#545454'
-export const whiteColor = '#eff1ed'
+export const mainColor = "#121316";
+export const secondaryColor = "#f22b29";
+export const errorColor = "#545454";
+export const whiteColor = "#eff1ed";
+export const greyColor = "#212225";
 
 export const muiTheme = createMuiTheme({
   palette: {
     type: "dark",
     primary: {
-      main: mainColor,
+      main: mainColor
     },
     secondary: {
       main: secondaryColor
@@ -33,13 +34,14 @@ export const muiTheme = createMuiTheme({
     },
     display4: {
       color: whiteColor
-    },
+    }
   }
-})
+});
 
 export const styledTheme = {
   mainColor,
   secondaryColor,
   errorColor,
-  whiteColor
-}
+  whiteColor,
+  greyColor
+};
