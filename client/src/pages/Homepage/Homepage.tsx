@@ -1,6 +1,7 @@
 import * as React from "react";
 import Introduction from "./components/Introduction/Introduction";
 import Features from "./components/Features/Features";
+import Header from "./components/Header/Header";
 import styled from "styled-components";
 
 import { Typography } from "@material-ui/core";
@@ -38,6 +39,7 @@ const TextBlockItem = styled(Typography)`
 
 const Homepage = () => (
   <Body>
+    <Header />
     <Introduction />
     <Features />
     <TextBlockContainer>

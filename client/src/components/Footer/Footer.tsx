@@ -6,7 +6,7 @@ const emailIcon = require("./img/email.svg");
 const githubIcon = require("./img/github.svg");
 const linkedInIcon = require("./img/linkedin.svg");
 
-const Container = styled.div`
+const Container = styled.footer`
   padding: 0 16px;
   min-height: 33px;
   display: flex;
